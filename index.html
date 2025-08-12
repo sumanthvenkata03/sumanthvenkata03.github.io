@@ -1,380 +1,292 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="app">
-	<head>
-		<meta charset="utf-8" />
+<head>
+  <meta charset="utf-8" />
+  <title>Sumanth Venkata • Portfolio</title>
+  <meta name="description" content="Portfolio" />
+  <meta name="author" content="Sumanth Venkata" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-		<title>Sumanth Venkata</title>
-		<meta name="description" content="Portfolio" />
-		<meta name="author" content="sumanth" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" type="image/x-icon" href="favicon.ico" />
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
-		<link
-			rel="stylesheet"
-			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-			integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-			crossorigin="anonymous"
-		/>
-		<link rel="stylesheet" href="mainCSS.css" />
-	</head>
+  <!-- AngularJS 1.x -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
-	<body class="container-fluid" ng-controller="homeController">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<div class="row">
-				<nav class="navbar col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-init="tab = 1">
-					<a
-						class="navbar-brand active col-lg-4 col-md-4 col-sm-12 col-xs-12 navBarOverRide"
-						ng-class="{ active : tab === 1}"
-						ng-click="tab = 1"
-						href="#"
-					>
-						<span class="introText logo-v-r">Sumanth Venkata</span>
-					</a>
-					<a
-						class="navbar-brand col-lg-2 col-md-2 col-sm-3 col-xs-3 navBarOverRide"
-						ng-class="{ active : tab === 2}"
-						ng-click="tab = 2"
-						href="#secBookmark"
-					>
-						<span class="tabTitles">
-							<h4>About Me</h4>
-						</span>
-					</a>
-					<a
-						class="navbar-brand col-lg-2 col-md-2 col-sm-3 col-xs-3 navBarOverRide"
-						ng-class="{ active : tab === 3}"
-						ng-click="tab = 3"
-						href="#"
-					>
-						<span class="tabTitles">
-							<h4>Work</h4>
-						</span>
-					</a>
-					<a
-						class="navbar-brand col-lg-2 col-md-2 col-sm-3 col-xs-3 navBarOverRide"
-						ng-class="{ active : tab === 4}"
-						ng-click="tab = 4"
-						href="#"
-					>
-						<span class="tabTitles">
-							<h4>Contact Me</h4>
-						</span>
-					</a>
-					<a
-						class="navbar-brand col-lg-2 col-md-2 col-sm-3 col-xs-3 navBarOverRide navBarDownload"
-						href="assets/resume/sumanth_venkata_resume.docx"
-					>
-						<span class="tabTitles">
-							<h4>Download Resume</h4>
-						</span>
-					</a>
-				</nav>
-			</div>
+  <!-- Bootstrap 3 -->
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous"
+  />
 
-			<div class="" ng-show="tab === 1">
-				<div class="row">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 intro-text-outerbox">
-						<h1 class="introText introText-name text-animation">
-							Hello there, <br />
-							I'm Sumanth Venkata
-						</h1>
-						<div class="">
-							<p class="introText inroText-role text-animation">
-								User-Interface / NodeJS / MEAN STACK Developer
-							</p>
-						</div>
-					</div>
-				</div>
+  <link rel="stylesheet" href="mainCSS.css" />
+</head>
 
-				<div class="row">
-					<div class="home-desc-aboutme">
-						<div class="home-desc-text">
-							<h2>
-								<b>Few lines about me</b>
-							</h2>
-							<p class="home-desc-bottom-text">
-								I'm a professional developer with around <b>8 year's</b> of hands on experience
-								designing and developing web and front-end applications. Highly actuated in Web
-								development via, MVC by using views, view state,
-								<b>Bootstrap, CSS3, HTML5, JavaScript</b> etc. Also, broadly knowledgeable in a wide
-								variety of computer languages as well as the principles and techniques of website
-								construction and maintenance.
-								<br />
-								<br />Extensive knowledge in all phases of the
-								<b
-									>Software Development Life Cycle (SDLC) including requirements gathering,
-									Analysis, Design, Implementation, Testing and Deployment</b
-								>
-								as well as software engineering methods. Highly adept at conveying complex technical
-								information to a variety of professional and lay audiences in a clear and
-								understandable manner.
-							</p>
-						</div>
-					</div>
-				</div>
+<body class="container-fluid" ng-controller="homeController as vm">
+  <!-- NAV -->
+  <header class="site-header">
+    <nav class="navbar navbar-default navbar-fixed-top custom-nav" role="navigation" ng-init="vm.tab = 1">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false" aria-controls="main-nav">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand brand-name" href="#" ng-click="vm.tab = 1">Sumanth Venkata</a>
+        </div>
 
-				<img src="laptopBackground.jpg" class="bg bgHome" alt="" />
-			</div>
-			<div class="" ng-show="tab === 2">
-				<div class="row">
-					<div class="intro-text-outerbox">
-						<h1 class="introText-name introText text-animation">About Me</h1>
-						<h2 class="inroText-role introText text-animation">
-							I'm a professional developer with around 8 year's of hands on experience designing and
-							developing web and front-end applications.
-						</h2>
-					</div>
+        <div id="main-nav" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li ng-class="{active: vm.tab === 1}"><a href="#" ng-click="vm.tab = 1">Home</a></li>
+            <li ng-class="{active: vm.tab === 2}"><a href="#secBookmark" ng-click="vm.tab = 2">About</a></li>
+            <li ng-class="{active: vm.tab === 3}"><a href="#" ng-click="vm.tab = 3">Work</a></li>
+            <li ng-class="{active: vm.tab === 4}"><a href="#" ng-click="vm.tab = 4">Contact</a></li>
+            <li>
+              <a class="btn btn-accent nav-resume" href="assets/resume/sumanth_venkata_resume.docx">
+                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Resume
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
 
-					<div class="about-me-content-outer">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<h2 class="description-main-heading">Technical Skills</h2>
+  <!-- HOME / HERO -->
+  <main>
+    <section class="section section-hero" ng-show="vm.tab === 1">
+      <img src="laptopBackground.jpg" class="bg bgHome" alt="Laptop background" />
+      <div class="hero-overlay"></div>
 
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 about-me-skill-boxes">
-								<img src="assets/images/html5logo.png" class="logo" alt="htmlImage" />
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 about-me-skill-boxes">
-								<img src="assets/images/css31600.png" class="logo" alt="cssLogo" />
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 about-me-skill-boxes">
-								<img src="assets/images/javascript.png" class="logo" alt="JavascriptLogo" />
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 about-me-skill-boxes">
-								<img src="assets/images/jQurery.gif" class="logo" alt="jqueryLogo" />
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 about-me-skill-boxes">
-								<img src="assets/images/angular2.png" class="logo" alt="angular2Logo" />
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 about-me-skill-boxes">
-								<img src="assets/images/angularjs.png" class="logo" alt="angularLogo" />
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 about-me-skill-boxes">
-								<img src="assets/images/kendo-ui.png" class="logo" alt="gitHub" />
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 about-me-skill-boxes">
-								<img src="assets/images/nest.png" class="logo" alt="gitHub" />
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 about-me-skill-boxes">
-								<img src="assets/images/aggrid.png" class="logo" alt="gitHub" />
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 about-me-skill-boxes">
-								<img src="assets/images/nodejs.png" class="logo" alt="nodejsLogo" />
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 about-me-skill-boxes">
-								<img src="assets/images/mongodb.png" class="logo" alt="mongoDbLogo" />
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 about-me-skill-boxes">
-								<img src="assets/images/sql.png" class="logo" alt="sqlLogo" />
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 about-me-skill-boxes">
-								<img src="assets/images/github.png" class="logo" alt="gitHub" />
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 about-me-skill-boxes">
-								<img src="assets/images/bootstrap.png" class="logo" alt="gitHub" />
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 about-me-skill-boxes">
-								<img src="assets/images/photoshop.png" class="logo" alt="gitHub" />
-							</div>
-						</div>
+      <div class="container hero-inner">
+        <h1 class="introText introText-name text-animation">
+          Hello, I’m <span class="accent">Sumanth</span><br/>Venkata
+        </h1>
+        <p class="introText inroText-role text-animation">
+          User Interface • Node.js • MEAN Stack Developer
+        </p>
 
-						<div class="">
-							<h2 class="description-main-heading">Education</h2>
-							<div class="about-edu-tabs">
-								<b>Bachelors of Technology</b> in Computer Science and Engineering from
-								<a href="https://www.annauniv.edu" target="_blank">Anna University</a>- Tamil Nadu.
-								<span class="fromTo">August 2005 to May 2009</span>
-							</div>
-						</div>
-					</div>
-				</div>
+        <div class="hero-ctas">
+          <a class="btn btn-accent btn-lg" href="#" ng-click="vm.tab = 3">View Work</a>
+          <a class="btn btn-ghost btn-lg" href="#" ng-click="vm.tab = 4">Contact Me</a>
+        </div>
 
-				<img src="aboutMeBackgroundImage.jpg" class="bg bg-rest-not-home" />
-			</div>
+        <div class="home-desc-aboutme">
+  <div class="home-desc-text card card-soft">
+    <h2><b>Few lines about me</b></h2>
+    <p class="home-desc-bottom-text">
+      I’m an experienced <b>MEAN/MERN Stack Developer</b> with a strong background in building scalable, responsive web applications using modern front-end and back-end technologies.
+      Currently contributing to <b>enterprise-grade projects</b> at Ventera Corporation, leveraging expertise in <b>Angular (19), ReactJS, Node.js, HTML5, CSS3, JavaScript, jQuery, and Bootstrap</b> to deliver clean, efficient, and accessible UI/UX.
+      <br><br>
+      I have hands-on experience in <b>RESTful API</b> and microservices development, <b>CI/CD pipelines</b> with Git, GitHub, and Jenkins, and ensuring applications meet <b>Section 508 accessibility standards</b>.
+      Skilled in <b>testing & debugging</b> using Jest, Karma, and Protractor, I also focus on <b>performance optimization</b> and <b>security compliance</b> with token-based authentication and role-based access control.
+      <br><br>
+      Passionate about <b>collaboration</b>, I work closely with cross-functional teams in Agile/Scrum environments and thrive on delivering high-quality, user-centric solutions that drive business value.
+    </p>
+  </div>
+</div>
 
-			<div ng-show="tab === 3">
-				<div class="row intro-text-outerbox">
-					<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-						<h1 class="introText introText-name introText-name-work text-animation">
-							Front End Developer
-						</h1>
-					</div>
-					<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-						<h1 class="introText introText-name introText-name-work text-animation">
-							User Interface Developer
-						</h1>
-					</div>
+      </div>
+    </section>
 
-					<div class="">
-						<p class="inroText-role introText text-animation">Overview of my previous work.</p>
-					</div>
-				</div>
-				<div class="row previous-experience">
-					<div class="previous-experience-tiles">
-						<h3>MEAN Stack Developer / Sr. Angular Developer</h3>
-						<p>
-							Client: VENTERA CORPORATION/CMS
-							<span class="experience-period">march 2019 to Current</span>
-						</p>
-					</div>
-					<div class="previous-experience-tiles">
-						<h3>MEAN Stack Developer / Sr. UI Developer</h3>
-						<p>
-							Client: UHG/OPTUM
-							<span class="experience-period">April 2018 to feb 2019</span>
-						</p>
-					</div>
+    <!-- ABOUT -->
+    <section class="section section-about" id="secBookmark" ng-show="vm.tab === 2">
+      <img src="aboutMeBackgroundImage.jpg" class="bg bg-rest-not-home" alt="About background" />
+      <div class="overlay"></div>
 
-					<div class="previous-experience-tiles">
-						<h3>MEAN Stack Developer / Sr. NodeJS Developer</h3>
-						<p>
-							Client: Televox Software
-							<span class="experience-period">july 2016 to march 2018</span>
-						</p>
-					</div>
+      <div class="container">
+        <div class="intro-text-outerbox text-center">
+          <h1 class="introText introText-name text-animation">About Me</h1>
+          <h2 class="inroText-role introText text-animation">
+            Professional developer with ~8 years of experience crafting web & front-end applications.
+          </h2>
+        </div>
 
-					<div class="previous-experience-tiles">
-						<h3>Senior Front End Developer / NodeJS Developer</h3>
-						<p>
-							Client: CMS Health care express
-							<span class="experience-period">Nov 2014 to June 2016 </span>
-						</p>
-					</div>
+        <div class="about-me-content-outer">
+          <h2 class="description-main-heading">Technical Skills</h2>
 
-					<div class="previous-experience-tiles">
-						<h3>Front End Developer</h3>
-						<p>
-							Client: EHR-LLC Florida
-							<span class="experience-period">Feb 2013 to Oct 2014</span>
-						</p>
-					</div>
+          <div class="skills-grid">
+  <div class="skill-card"><img src="assets/images/html5logo.png" class="logo" alt="HTML5"></div>
+  <div class="skill-card"><img src="assets/images/css31600.png" class="logo" alt="CSS3"></div>
+  <div class="skill-card"><img src="assets/images/javascript.png" class="logo" alt="JavaScript"></div>
+  <div class="skill-card"><img src="assets/images/jQurery.gif" class="logo" alt="jQuery"></div>
+  <div class="skill-card"><img src="assets/images/angular2.png" class="logo" alt="Angular"></div>
+  <div class="skill-card"><img src="assets/images/angularjs.png" class="logo" alt="AngularJS"></div>
+  <div class="skill-card"><img src="assets/images/kendo-ui.png" class="logo" alt="Kendo UI"></div>
+  <div class="skill-card"><img src="assets/images/nest.png" class="logo" alt="NestJS"></div>
+  <div class="skill-card"><img src="assets/images/aggrid.png" class="logo" alt="AG Grid"></div>
+  <div class="skill-card"><img src="assets/images/nodejs.png" class="logo" alt="NodeJS"></div>
+  <div class="skill-card"><img src="assets/images/mongodb.png" class="logo" alt="MongoDB"></div>
+  <div class="skill-card"><img src="assets/images/sql.png" class="logo" alt="SQL"></div>
+  <div class="skill-card"><img src="assets/images/github.png" class="logo" alt="GitHub"></div>
+  <div class="skill-card"><img src="assets/images/bootstrap.png" class="logo" alt="Bootstrap"></div>
+  <div class="skill-card"><img src="assets/images/photoshop.png" class="logo" alt="Photoshop"></div>
+</div>
 
-					<div class="previous-experience-tiles">
-						<h3>UI Developer</h3>
-						<p>
-							Client: STOICS IT SOLUTIONS - India
-							<span class="experience-period">April 2011 to Dec 2012</span>
-						</p>
-					</div>
-				</div>
-				<img src="workTieImage.jpg" class="bg bg-rest-not-home" alt="image" />
-			</div>
 
-			<div ng-show="tab === 4">
-				<div class="intro-text-outerbox">
-					<h1 class="introText introText-name text-animation">Contact Me</h1>
-					<p class="inroText-role introText text-animation">
-						Feel free to contact me. I'm available for short term to long term contract positions
-						anywhere in The US.
-					</p>
+          <h2 class="description-main-heading">Education</h2>
 
-					<div class="row cnt-form-box">
-						<div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 form-innerBox">
-							<h2 class="cnt-form-text">Contact Form</h2>
+<!-- Master's Degree -->
+<div class="about-edu-tabs card card-soft">
+  <b>Master's Degree</b> in Computer Science from
+  <a href="https://www.ucmo.edu" target="_blank" rel="noopener noreferrer">
+    University of Central Missouri
+  </a>, USA.
+  <span class="fromTo">August 2016 – December 2017</span>
+</div>
 
-							<form>
-								<div class="form-row">
-									<div class="form-group col-md-6">
-										<input type="text" class="form-control" placeholder="First name" />
-									</div>
-									<div class="form-group col-md-6">
-										<input type="text" class="form-control" placeholder="Last name" />
-									</div>
-								</div>
-								<div class="form-row">
-									<div class="form-group col-md-6">
-										<input type="email" class="form-control" id="inputEmail" placeholder="Email" />
-									</div>
-									<div class="form-group col-md-6">
-										<input type="text" class="form-control" id="inputPhone" placeholder="Phone" />
-									</div>
-								</div>
-								<div class="form-group col-md-12">
-									<textarea
-										class="form-control"
-										id="exampleFormControlTextarea1"
-										rows="4"
-										placeholder="Message"
-									></textarea>
-								</div>
-								<div class="form-group col-md-12">
-									<button
-										type="submit"
-										class="btn btn-success submitButton"
-										onclick="alert('Your request has been submitted, will contact you shortly !!')"
-									>
-										Submit
-									</button>
-								</div>
-							</form>
+<!-- Bachelor's Degree -->
+<div class="about-edu-tabs card card-soft">
+  <b>Bachelor of Technology</b> in Computer Science & Engineering from
+  <a href="https://www.annauniv.edu" target="_blank" rel="noopener noreferrer">
+    Anna University
+  </a>, Tamil Nadu.
+  <span class="fromTo">August 2012 – July 2016</span>
+</div>
 
-							<!-- <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                   <div class="row">
-    <div class="col">
-      <input type="text" class="form-control" placeholder="First name">
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+<section class="section section-work" ng-show="vm.tab === 3">
+  <img src="workTieImage.jpg" class="bg bg-rest-not-home" alt="Work background" />
+  <div class="overlay"></div>
+
+  <div class="container">
+    <div class="row intro-text-outerbox text-center">
+      <div class="col-md-12">
+        <h1 class="introText introText-name introText-name-work text-animation">
+          Experience
+        </h1>
+        <p class="inroText-role introText text-animation">
+          Overview of my recent work
+        </p>
+      </div>
     </div>
-    <div class="col">
-      <input type="text" class="form-control" placeholder="Last name">
+
+    <!-- Add 'animate' class when the Work tab is active to re-trigger the animation -->
+    <div class="timeline" ng-class="{'animate': vm.tab === 3}">
+      <!-- Ventera -->
+      <div class="timeline-item card">
+        <h3>MEAN/MERN Stack Developer • UI Lead</h3>
+        <p>
+          <b>Ventera Corporation / CMS</b>
+          <span class="experience-period">Mar 2019 – Present • Leesburg, VA</span>
+        </p>
+        <ul class="bullets compact">
+          <li>Built & maintained responsive UIs in <b>Angular 10+</b> and <b>ReactJS</b> with HTML5, CSS3/SASS, Bootstrap.</li>
+          <li>Developed <b>Node.js/Express</b> microservices & REST APIs; integrated internal CMS.gov services.</li>
+          <li>Delivered Section <b>508 accessibility</b> compliance and performance optimizations.</li>
+          <li>Drove CI/CD with <b>Git/GitHub</b> and <b>Jenkins</b>; authored unit/integration tests (Jest, Karma, Protractor).</li>
+          <li>Followed <b>Agile/Scrum</b> ceremonies, code reviews, and documentation best practices.</li>
+        </ul>
+      </div>
+
+      <!-- Pioneer / UHG -->
+      <div class="timeline-item card">
+        <h3>MERN Stack / React Developer</h3>
+        <p>
+          <b>Pioneer Consulting (UHG/Optum – BEACH)</b>
+          <span class="experience-period">Jan 2018 – Feb 2019 • Hartford, CT</span>
+        </p>
+        <ul class="bullets compact">
+          <li>Built features for the <b>Benefit Eligibility And Coverage Hub (BEACH)</b> used by UHG employees.</li>
+          <li>Stack: <b>Angular</b>, <b>Node.js</b>, <b>MongoDB</b>; implemented group/member-level benefit views.</li>
+        </ul>
+      </div>
+
+      <!-- (Optional) keep earlier roles if you want a longer timeline -->
+      <!--
+      <div class="timeline-item card">
+        <h3>MEAN Stack Developer / Sr. NodeJS Developer</h3>
+        <p>Televox Software <span class="experience-period">Jul 2016 – Mar 2018</span></p>
+      </div>
+      -->
     </div>
   </div>
-                        
-                    <div class="form-group col-lg-12">
-                        <label class="col-lg-6" for="email">Email address:</label>
-                        <div class="col-lg-6"><input type="email" class="form-control" id="email"></div>
-                      </div>
-                    <div class="form-group">
-                        <label for="comment">Comment:</label>
-                        <textarea class="form-control" rows="5" id="comment"></textarea>
-                    </div>
-                    </div> -->
-						</div>
-					</div>
+</section>
 
-					<img src="connectMe.jpg" class="bg bg-rest-not-home" alt="" />
-				</div>
-			</div>
-		</div>
 
-		<footer class="footerr">
-			<h2 class="logo_heading">Lets Connect</h2>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 image_logo_outer">
-				<span class="">
-					<a href="https://github.com/sumanth0304" target="_blank">
-						<img class="logoImage" src="assets/logo/git.svg" />
-					</a>
-				</span>
-				<span class="">
-					<a href="https://plus.google.com/u/0/111676802561038622558" target="_blank">
-						<img class="logoImage" src="assets/logo/gplus.png" />
-					</a>
-				</span>
-				<span class="">
-					<a href="https://www.linkedin.com/in/sumanth-venkata-156690159/" target="_blank">
-						<img class="logoImage" src="assets/logo/linkedin.png" />
-					</a>
-				</span>
-			</div>
-		</footer>
+    <!-- CONTACT -->
+    <section class="section section-contact" ng-show="vm.tab === 4">
+      <img src="connectMe.jpg" class="bg bg-rest-not-home" alt="Contact background" />
+      <div class="overlay"></div>
 
-		<script src="module.js"></script>
-	</body>
+      <div class="container">
+        <div class="intro-text-outerbox text-center">
+          <h1 class="introText introText-name text-animation">Contact Me</h1>
+          <p class="inroText-role introText text-animation">
+            I’m available for short-term to long-term contract roles across the US.
+          </p>
+        </div>
 
-	<!--<body class="container-fluid">
-   <div class="row">
-       
-            <nav class="navbar col-lg-12 col-md-12 col-sm-12">
+        <div class="row cnt-form-box">
+          <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 form-innerBox card card-soft">
+            <h2 class="cnt-form-text">Contact Form</h2>
 
-              <a class="navbar-brand active col-lg-3 col-md-3 col-sm-3 navBarText textColor" href="#">Home <span class="sr-only">(current)</span></a>
-              <a class="navbar-brand col-lg-3 col-md-3 col-sm-3 navBarText textColor" href="#">About Me</a>
-              <a class="navbar-brand col-lg-3 col-md-3 col-sm-3 navBarText textColor" href="#">Work</a>
-              <a class="navbar-brand col-lg-3 col-md-3 col-sm-3 navBarText textColor" href="#">Contact</a>
+            <form onsubmit="alert('Your request has been submitted. I will contact you shortly!'); return false;">
+              <div class="row">
+                <div class="form-group col-sm-6">
+                  <label class="sr-only" for="firstName">First name</label>
+                  <input id="firstName" type="text" class="form-control" placeholder="First name" required />
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="sr-only" for="lastName">Last name</label>
+                  <input id="lastName" type="text" class="form-control" placeholder="Last name" />
+                </div>
+              </div>
 
-            </nav>
-     
-    </div> 
-  <p>Software Engineering Graduate from University of Houston-Clearlake. One year professional experience in web-development and 2+ years of experience in web-development related stuff.
+              <div class="row">
+                <div class="form-group col-sm-6">
+                  <label class="sr-only" for="inputEmail">Email</label>
+                  <input id="inputEmail" type="email" class="form-control" placeholder="Email" required />
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="sr-only" for="inputPhone">Phone</label>
+                  <input id="inputPhone" type="tel" class="form-control" placeholder="Phone" />
+                </div>
+              </div>
 
-Highly actuated in Web development via, MVC by using views, view state, bootstrap, CSS3, HTML5, JavaScript etc. in Agile methodologies environment.
+              <div class="form-group">
+                <label class="sr-only" for="message">Message</label>
+                <textarea id="message" class="form-control" rows="4" placeholder="Message" required></textarea>
+              </div>
 
-Also, broadly knowledgeable in a wide variety of computer languages as well as the principles and techniques of website construction and maintenance. Extensive knowledge in all phases of the Software Development Life Cycle (SDLC) including requirements gathering, Analysis, Design, Implementation, Testing and Deployment as well as software engineering methods. Highly adept at conveying complex technical information to a variety of professional and lay audiences in a clear and understandable manner.</p>
-</body>-->
+              <button type="submit" class="btn btn-accent submitButton">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footerr">
+    <h2 class="logo_heading">Let’s Connect</h2>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 image_logo_outer text-center">
+      <a href="https://github.com/sumanth0304" target="_blank" rel="noopener noreferrer">
+        <img class="logoImage" src="assets/logo/git.svg" alt="GitHub" />
+      </a>
+      <a href="https://plus.google.com/u/0/111676802561038622558" target="_blank" rel="noopener noreferrer">
+        <img class="logoImage" src="assets/logo/gplus.png" alt="Google Plus" />
+      </a>
+      <a href="https://www.linkedin.com/in/sumanth-venkata-156690159/" target="_blank" rel="noopener noreferrer">
+        <img class="logoImage" src="assets/logo/linkedin.png" alt="LinkedIn" />
+      </a>
+    </div>
+  </footer>
+
+  <!-- Your AngularJS app -->
+  <script src="module.js"></script>
+
+  <!-- jQuery (optional, only if you need Bootstrap JS collapse) -->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+</body>
 </html>
