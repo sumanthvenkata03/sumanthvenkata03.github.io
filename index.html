@@ -223,47 +223,49 @@
       </p>
     </div>
 
-    <div class="row cnt-form-box">
-      <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 form-innerBox card card-soft">
-        <h2 class="cnt-form-text">Contact Form</h2>
+   <div class="row cnt-form-box">
+  <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 form-innerBox card card-soft">
+    <!-- Toast lives here -->
+    <div id="contactToast" class="toast-inline" aria-live="polite" aria-atomic="true"></div>
 
-        <form id="contactForm" action="https://formspree.io/f/xqalngpk" method="POST">
-          <div class="row">
-            <div class="form-group col-sm-6">
-              <label class="sr-only" for="firstName">First name</label>
-              <input id="firstName" name="firstName" type="text" class="form-control" placeholder="First name" required />
-            </div>
-            <div class="form-group col-sm-6">
-              <label class="sr-only" for="lastName">Last name</label>
-              <input id="lastName" name="lastName" type="text" class="form-control" placeholder="Last name" />
-            </div>
-          </div>
+    <h2 class="cnt-form-text">Contact Form</h2>
 
-          <div class="row">
-            <div class="form-group col-sm-6">
-              <label class="sr-only" for="inputEmail">Email</label>
-              <input id="inputEmail" name="email" type="email" class="form-control" placeholder="Email" required />
-            </div>
-            <div class="form-group col-sm-6">
-              <label class="sr-only" for="inputPhone">Phone</label>
-              <input id="inputPhone" name="phone" type="tel" class="form-control" placeholder="Phone" />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="sr-only" for="message">Message</label>
-            <textarea id="message" name="message" class="form-control" rows="4" placeholder="Message" required></textarea>
-          </div>
-
-          <!-- Optional hidden fields -->
-          <input type="hidden" name="formName" value="Portfolio Contact" />
-          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-
-          <button type="submit" class="btn btn-accent submitButton">Submit</button>
-          <p id="formStatus" style="margin-top:10px;color:#cfd3da;"></p>
-        </form>
+    <form id="contactForm" action="https://formspree.io/f/xqalngpk" method="POST">
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label class="sr-only" for="firstName">First name</label>
+          <input id="firstName" name="firstName" type="text" class="form-control" placeholder="First name" required />
+        </div>
+        <div class="form-group col-sm-6">
+          <label class="sr-only" for="lastName">Last name</label>
+          <input id="lastName" name="lastName" type="text" class="form-control" placeholder="Last name" />
+        </div>
       </div>
-    </div>
+
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label class="sr-only" for="inputEmail">Email</label>
+          <input id="inputEmail" name="email" type="email" class="form-control" placeholder="Email" required />
+        </div>
+        <div class="form-group col-sm-6">
+          <label class="sr-only" for="inputPhone">Phone</label>
+          <input id="inputPhone" name="phone" type="tel" class="form-control" placeholder="Phone" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="sr-only" for="message">Message</label>
+        <textarea id="message" name="message" class="form-control" rows="4" placeholder="Message" required></textarea>
+      </div>
+
+      <input type="hidden" name="formName" value="Portfolio Contact" />
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+      <button type="submit" class="btn btn-accent submitButton">Submit</button>
+    </form>
+  </div>
+</div>
+
   </div>
 </section>
 
@@ -271,14 +273,24 @@
 <script>
   (function(){
     var form = document.getElementById('contactForm');
-    var status = document.getElementById('formStatus');
-    if (!form) return;
+    var toast = document.getElementById('contactToast');
+    if (!form || !toast) return;
+
+    function showToast(message, type) {
+      toast.className = 'toast-inline ' + (type || 'success');
+      toast.innerHTML = message + '<div class="toast-progress"><i></i></div>';
+      toast.classList.add('show');
+
+      // hide after 8s
+      setTimeout(function(){
+        toast.classList.remove('show');
+      }, 8000);
+    }
 
     form.addEventListener('submit', function(e){
       e.preventDefault();
-      status.textContent = 'Sending...';
-
       var data = new FormData(form);
+
       fetch(form.action, {
         method: 'POST',
         body: data,
@@ -286,18 +298,19 @@
       }).then(function(response){
         if (response.ok) {
           form.reset();
-          status.textContent = '✅ Thanks! Your message has been sent.';
+          showToast('✅ Thanks! Your message has been sent.', 'success');
         } else {
           return response.json().then(function(data){
             throw new Error(data.errors ? data.errors.map(e => e.message).join(', ') : 'Submission failed');
           });
         }
       }).catch(function(err){
-        status.textContent = '❌ Oops, there was a problem: ' + err.message;
+        showToast('❌ Oops, there was a problem: ' + err.message, 'error');
       });
     });
   })();
 </script>
+
 
   </main>
 
