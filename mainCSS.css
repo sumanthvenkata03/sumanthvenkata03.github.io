@@ -57,6 +57,7 @@ body {
 }
 .brand-name {
   font-weight: 800; letter-spacing: .5px; color: var(--white) !important;
+  margin-left: 40px !important; /* desktop offset */
 }
 .custom-nav .navbar-nav > li > a {
   color: #cfd3da; font-weight: 600; transition: color .2s, transform .2s;
@@ -113,36 +114,33 @@ body {
 .description-main-heading {
   font-size: 32px; font-weight: 800; text-align: center; margin: 20px 0 10px;
 }
-/* Skills Grid Layout */
+
+/* ===== Skills Grid (compact & aligned) ===== */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 20px;
   padding: 20px;
 }
-
-/* Each skill card */
 .skill-card {
   background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
   border-radius: 12px;
-  padding: 15px;
+  padding: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.18s, box-shadow 0.18s;
+  transition: transform .18s, box-shadow .18s;
+  min-height: 110px;
 }
 .skill-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.35);
 }
+.logo { max-width: 100%; height: auto; display: block; }
+.skill-card img.logo { width: 80px; height: 80px; object-fit: contain; }
 
-/* Logo inside skill card */
-.skill-card img.logo {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-}
-
+/* Education blocks */
 .about-edu-tabs { width: 90%; margin: 20px auto; font-size: 16px; }
 .fromTo { float: right; color: var(--muted); font-weight: 600; }
 
@@ -156,87 +154,18 @@ body {
 .timeline-item h3 { margin-top: 0; font-weight: 800; color: #e9ecf1; }
 .experience-period { float: right; color: var(--muted); }
 
-/* Contact */
-.cnt-form-box { margin-top: 24px; text-align: center; }
-.form-innerBox { margin: 0 auto; float: none; }
-.cnt-form-text { color: #cfd3da; font-weight: 700; margin-bottom: 16px; }
-
-/* Footer */
-.footerr {
-  background-color: #0b0d10; border-top: 1px solid rgba(255,255,255,.05);
-}
-.logo_heading { color: #cfd3da; font-weight: 800; font-size: 24px; text-align: center; margin-bottom: 10px; }
-.image_logo_outer { margin: 8px auto 0; text-align: center; }
-
-/* Footer icons – visible on dark background */
-.logoImage {
-  width: 48px; height: 48px; margin: 10px 8px; border-radius: 50%;
-  transition: transform .18s, box-shadow .18s, filter .18s;
-  filter: brightness(0) invert(1); /* make dark icons appear white */
-}
-.logoImage:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 10px 20px rgba(0,0,0,.35);
-  border: 2px solid rgba(255,255,255,.6);
-  filter: brightness(0) invert(1) drop-shadow(0 2px 6px rgba(0,0,0,.6));
-}
-
-/* Responsive tweaks */
-@media (max-width: 767px) {
-  .introText-name { font-size: 36px; }
-  .inroText-role { font-size: 16px; }
-  .hero-ctas { flex-direction: column; align-items: center; }
-  .bgHome, .bg-rest-not-home { height: 520px; }
-  .section { padding-top: 110px; }
-  .about-edu-tabs { width: 95%; }
-}
-
-/* Keep original hover border from earlier versions (harmless duplicate) */
-.logoImage:hover { border: 2px solid white; }
-
-/* =========================
-   Tweaks requested
-   ========================= */
-
-/* --- NAV SPACING TWEAKS --- */
-.custom-nav .navbar-header .navbar-brand {
-  padding: 18px 16px;                /* brand spacing */
-}
-.custom-nav .navbar-nav { 
-  margin-right: 12px;                /* room near right edge */
-}
-.custom-nav .navbar-nav > li { 
-  margin-left: 8px;                  /* space between items */
-}
-.custom-nav .navbar-nav > li > a {
-  padding: 18px 16px;                /* taller / easier to click */
-  border-radius: 8px;                /* nicer hover look */
-}
-.custom-nav .navbar-nav > li > a.btn { 
-  padding: 10px 14px !important;     /* compact Resume button */
-  margin-top: 10px;                  /* align with links */
-}
-
-/* Footer layout spacing (consistent gaps) */
-.footerr .image_logo_outer {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin: 12px auto 0;
-}
 /* Work: nicer bullets */
 .bullets { margin: 10px 0 0 0; padding-left: 18px; color: #cbd1d8; }
 .bullets.compact li { margin: 6px 0; line-height: 1.45; }
 
-/* Work: reveal animation (re-triggers when 'animate' toggles) */
+/* Work: base reveal state */
 .section-work .timeline .timeline-item {
   opacity: 0;
   transform: translateY(18px);
 }
-@keyframes riseIn {
-  to { opacity: 1; transform: translateY(0); }
-}
+
+/* Legacy keyframe (harmless if unused) */
+@keyframes riseIn { to { opacity: 1; transform: translateY(0); } }
 
 /* Fancy border draw + content fade-in (slower version) */
 .section-work .timeline.animate .timeline-item {
@@ -277,10 +206,137 @@ body {
 .section-work .timeline.animate .timeline-item::after {
   animation: shimmer 1.5s ease-out forwards;
 }
-@keyframes shimmer {
-  100% { left: 125%; }
+@keyframes shimmer { 100% { left: 125%; } }
+
+/* Contact */
+.cnt-form-box { margin-top: 24px; text-align: center; }
+.form-innerBox { margin: 0 auto; float: none; }
+.cnt-form-text { color: #cfd3da; font-weight: 700; margin-bottom: 16px; }
+
+/* Footer */
+.footerr {
+  background-color: #0b0d10; border-top: 1px solid rgba(255,255,255,.05);
+}
+.logo_heading { color: #cfd3da; font-weight: 800; font-size: 24px; text-align: center; margin-bottom: 10px; }
+.image_logo_outer { margin: 8px auto 0; text-align: center; }
+
+/* Footer icons – visible on dark background */
+.logoImage {
+  width: 48px; height: 48px; margin: 10px 8px; border-radius: 50%;
+  transition: transform .18s, box-shadow .18s, filter .18s;
+  filter: brightness(0) invert(1);
+}
+.logoImage:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 20px rgba(0,0,0,.35);
+  border: 2px solid rgba(255,255,255,.6);
+  filter: brightness(0) invert(1) drop-shadow(0 2px 6px rgba(0,0,0,.6));
 }
 
-.brand-name {
-  margin-left: 40px !important;
+/* Keep original hover border (ok to duplicate) */
+.logoImage:hover { border: 2px solid white; }
+
+/* =========================
+   Tweaks requested (nav spacing)
+   ========================= */
+.custom-nav .navbar-header .navbar-brand { padding: 18px 16px; }
+.custom-nav .navbar-nav { margin-right: 12px; }
+.custom-nav .navbar-nav > li { margin-left: 8px; }
+.custom-nav .navbar-nav > li > a {
+  padding: 18px 16px;
+  border-radius: 8px;
+}
+.custom-nav .navbar-nav > li > a.btn {
+  padding: 10px 14px !important;
+  margin-top: 10px;
+}
+
+/* Footer layout spacing (consistent gaps) */
+.footerr .image_logo_outer {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+  margin: 12px auto 0;
+}
+
+/* =========================
+   Mobile responsiveness tweaks
+   ========================= */
+
+/* Fluid typography for big headings */
+.introText-name { font-size: clamp(32px, 6vw, 64px); }
+
+/* Brand margin only on desktop */
+@media (max-width: 991px) {
+  .brand-name { margin-left: 0 !important; }
+}
+
+/* Section spacing */
+@media (max-width: 991px) {
+  .section { padding-top: 110px; padding-bottom: 60px; }
+}
+@media (max-width: 767px) {
+  .section { padding-top: 96px; padding-bottom: 48px; }
+}
+
+/* Background image heights */
+@media (max-width: 991px) {
+  .bgHome { height: 620px; }
+  .bg-rest-not-home { height: 560px; }
+}
+@media (max-width: 480px) {
+  .bgHome { height: 520px; }
+  .bg-rest-not-home { height: 480px; }
+}
+
+/* Hero CTAs stack */
+@media (max-width: 767px) { .hero-ctas { gap: 10px; } }
+
+/* Skills grid tighter on small screens */
+@media (max-width: 991px) {
+  .skills-grid { grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 16px; padding: 16px; }
+  .skill-card { min-height: 100px; padding: 12px; }
+  .skill-card img.logo { width: 70px; height: 70px; }
+}
+@media (max-width: 480px) {
+  .skills-grid { grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 12px; padding: 12px; }
+  .skill-card { min-height: 88px; padding: 10px; }
+  .skill-card img.logo { width: 56px; height: 56px; }
+}
+
+/* Education blocks tweaks */
+@media (max-width: 991px) {
+  .about-edu-tabs { width: 94%; font-size: 15px; }
+  .fromTo { float: none; display: block; margin-top: 6px; text-align: left; }
+}
+@media (max-width: 480px) {
+  .about-edu-tabs { width: 96%; font-size: 14px; }
+}
+
+/* Timeline cards on mobile */
+@media (max-width: 991px) {
+  .timeline { margin: 20px auto; padding: 0 8px; }
+  .timeline-item { padding: 16px 18px; }
+}
+@media (max-width: 480px) {
+  .timeline-item { padding: 14px 16px; border-left-width: 3px; }
+  .timeline-item h3 { font-size: 18px; }
+  .bullets { padding-left: 16px; }
+  .bullets.compact li { margin: 4px 0; }
+}
+
+/* Footer: icon & text size on mobile */
+@media (max-width: 767px) {
+  .logo_heading { font-size: 20px; }
+  .logoImage { width: 40px; height: 40px; margin: 8px 6px; }
+  .footerr .image_logo_outer { gap: 12px; }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
+/* Slightly shorter animation on very small screens (snappier) */
+@media (max-width: 480px) {
+  .section-work .timeline.animate .timeline-item { animation-duration: .9s, 1.1s; } /* cardFadeIn, borderDraw */
+  .section-work .timeline.animate .timeline-item::after { animation-duration: 1.2s; } /* shimmer */
 }
