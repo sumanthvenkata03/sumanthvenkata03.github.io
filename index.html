@@ -2,13 +2,32 @@
 <html lang="en" ng-app="app">
 <head>
   <meta charset="utf-8" />
-  <title>Sumanth Venkata • Portfolio</title>
-  <meta name="description" content="Portfolio" />
+  <title>Sumanth Venkata • Senior Front-End Engineer</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Sumanth Venkata — Senior front-end engineer: React, Angular, TypeScript, micro-frontends, AWS, accessibility, and AI-powered web apps." />
   <meta name="author" content="Sumanth Venkata" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://sumanthvenkata03.github.io/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Sumanth Venkata — Senior Front-End Engineer" />
+  <meta property="og:description" content="Senior front-end engineer: React, Angular, TypeScript, micro-frontends, AWS, accessibility, and AI-powered web apps." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sumanthvenkata03.github.io/" />
+  <meta property="og:image" content="https://sumanthvenkata03.github.io/mypic.jpg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sumanth Venkata — Senior Front-End Engineer" />
+  <meta name="twitter:description" content="Senior front-end engineer: React, Angular, TypeScript, micro-frontends, AWS, accessibility, and AI-powered web apps." />
+  <meta name="twitter:image" content="https://sumanthvenkata03.github.io/mypic.jpg" />
 
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <!-- Devicon (tech logos via CDN, no local files) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
   <!-- AngularJS 1.x -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
@@ -39,12 +58,13 @@
 
         <div id="main-nav" class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li ng-class="{active: vm.tab === 1}"><a href="#" ng-click="vm.tab = 1">Home</a></li>
-            <li ng-class="{active: vm.tab === 2}"><a href="#secBookmark" ng-click="vm.tab = 2">About</a></li>
-            <li ng-class="{active: vm.tab === 3}"><a href="#" ng-click="vm.tab = 3">Work</a></li>
-            <li ng-class="{active: vm.tab === 4}"><a href="#" ng-click="vm.tab = 4">Contact</a></li>
+            <li ng-class="{active: vm.tab === 1}"><a href="#" ng-click="vm.tab = 1" ng-attr-aria-current="{{vm.tab === 1 ? 'page' : undefined}}">Home</a></li>
+            <li ng-class="{active: vm.tab === 2}"><a href="#secBookmark" ng-click="vm.tab = 2" ng-attr-aria-current="{{vm.tab === 2 ? 'page' : undefined}}">About</a></li>
+            <li ng-class="{active: vm.tab === 3}"><a href="#" ng-click="vm.tab = 3" ng-attr-aria-current="{{vm.tab === 3 ? 'page' : undefined}}">Work</a></li>
+            <li ng-class="{active: vm.tab === 5}"><a href="#" ng-click="vm.tab = 5" ng-attr-aria-current="{{vm.tab === 5 ? 'page' : undefined}}">Projects</a></li>
+            <li ng-class="{active: vm.tab === 4}"><a href="#" ng-click="vm.tab = 4" ng-attr-aria-current="{{vm.tab === 4 ? 'page' : undefined}}">Contact</a></li>
             <li>
-              <a class="btn btn-accent nav-resume" href="assets/resume/sumanth_venkata_resume.docx">
+              <a class="btn btn-accent nav-resume" href="assets/resume/sumanth_venkata_resume.pdf" target="_blank" rel="noopener">
                 <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Resume
               </a>
             </li>
@@ -57,15 +77,17 @@
   <!-- HOME / HERO -->
   <main>
     <section class="section section-hero" ng-show="vm.tab === 1">
-      <img src="laptopBackground.jpg" class="bg bgHome" alt="Laptop background" />
+      <img src="laptopBackground.jpg" class="bg bgHome" alt="" aria-hidden="true" />
       <div class="hero-overlay"></div>
 
       <div class="container hero-inner">
+        <img src="mypic.jpg" class="profile-pic" alt="Sumanth Venkata" />
+
         <h1 class="introText introText-name text-animation">
           Hello, I’m <span class="accent">Sumanth</span><br/>Venkata
         </h1>
         <p class="introText inroText-role text-animation">
-          User Interface • Node.js • MEAN Stack Developer
+          Senior UI / Front-End Engineer · React · Angular · TypeScript · Micro-Frontends
         </p>
 
         <div class="hero-ctas">
@@ -74,26 +96,23 @@
         </div>
 
         <div class="home-desc-aboutme">
-  <div class="home-desc-text card card-soft">
-    <h2><b>Few lines about me</b></h2>
-    <p class="home-desc-bottom-text">
-      I’m an experienced <b>MEAN/MERN Stack Developer</b> with a strong background in building scalable, responsive web applications using modern front-end and back-end technologies.
-      Currently contributing to <b>enterprise-grade projects</b> at Ventera Corporation, leveraging expertise in <b>Angular (19), ReactJS, Node.js, HTML5, CSS3, JavaScript, jQuery, and Bootstrap</b> to deliver clean, efficient, and accessible UI/UX.
-      <br><br>
-      I have hands-on experience in <b>RESTful API</b> and microservices development, <b>CI/CD pipelines</b> with Git, GitHub, and Jenkins, and ensuring applications meet <b>Section 508 accessibility standards</b>.
-      Skilled in <b>testing & debugging</b> using Jest, Karma, and Protractor, I also focus on <b>performance optimization</b> and <b>security compliance</b> with token-based authentication and role-based access control.
-      <br><br>
-      Passionate about <b>collaboration</b>, I work closely with cross-functional teams in Agile/Scrum environments and thrive on delivering high-quality, user-centric solutions that drive business value.
-    </p>
-  </div>
-</div>
-
+          <div class="home-desc-text card card-soft">
+            <h2><b>Few lines about me</b></h2>
+            <p class="home-desc-bottom-text">
+              I’m a <b>senior front-end engineer</b> with 8 years building fast, accessible, large-scale web applications for enterprise and federally regulated platforms. For the past several years I’ve been the lead front-end engineer on <b>CMS’s QualityNet Platform</b> (with Cadmus Group, formerly Ventera) — a federal healthcare system spanning six mandated programs whose data drives Medicare value-based purchasing and reimbursement decisions worth billions.
+              <br><br>
+              I work primarily in <b>React, Angular, and TypeScript</b> on top of Node.js APIs. Right now I’m architecting a <b>Module Federation micro-frontend platform</b> (Vite) that hosts multiple independently deployable React and Angular apps behind a shared authentication shell and a private design-system / component library. I care deeply about design systems, performance, and accessibility — <b>Section 508 / WCAG</b> is part of how I build, not an afterthought.
+              <br><br>
+              I’m also building <b>AI into real products</b> — integrating LLMs (Anthropic Claude, Google Gemini) with prompt engineering and schema-validated structured outputs. Open to senior, lead, and principal front-end and full-stack roles, remote or in the DC metro area.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ABOUT -->
     <section class="section section-about" id="secBookmark" ng-show="vm.tab === 2">
-      <img src="aboutMeBackgroundImage.jpg" class="bg bg-rest-not-home" alt="About background" />
+      <img src="aboutMeBackgroundImage.jpg" class="bg bg-rest-not-home" alt="" aria-hidden="true" />
       <div class="overlay"></div>
 
       <div class="container">
@@ -107,210 +126,336 @@
         <div class="about-me-content-outer">
           <h2 class="description-main-heading">Technical Skills</h2>
 
-          <div class="skills-grid">
-  <div class="skill-card"><img src="assets/images/html5logo.png" class="logo" alt="HTML5"></div>
-  <div class="skill-card"><img src="assets/images/css31600.png" class="logo" alt="CSS3"></div>
-  <div class="skill-card"><img src="assets/images/javascript.png" class="logo" alt="JavaScript"></div>
-  <div class="skill-card"><img src="assets/images/jQurery.gif" class="logo" alt="jQuery"></div>
-  <div class="skill-card"><img src="assets/images/angular2.png" class="logo" alt="Angular"></div>
-  <div class="skill-card"><img src="assets/images/angularjs.png" class="logo" alt="AngularJS"></div>
-  <div class="skill-card"><img src="assets/images/kendo-ui.png" class="logo" alt="Kendo UI"></div>
-  <div class="skill-card"><img src="assets/images/nest.png" class="logo" alt="NestJS"></div>
-  <div class="skill-card"><img src="assets/images/aggrid.png" class="logo" alt="AG Grid"></div>
-  <div class="skill-card"><img src="assets/images/nodejs.png" class="logo" alt="NodeJS"></div>
-  <div class="skill-card"><img src="assets/images/mongodb.png" class="logo" alt="MongoDB"></div>
-  <div class="skill-card"><img src="assets/images/sql.png" class="logo" alt="SQL"></div>
-  <div class="skill-card"><img src="assets/images/github.png" class="logo" alt="GitHub"></div>
-  <div class="skill-card"><img src="assets/images/bootstrap.png" class="logo" alt="Bootstrap"></div>
-  <div class="skill-card"><img src="assets/images/photoshop.png" class="logo" alt="Photoshop"></div>
-</div>
+          <!-- Headline tech (Devicon icon strip) -->
+          <div class="tech-strip" aria-label="Headline technologies">
+            <i class="devicon-react-original colored" title="React" aria-label="React"></i>
+            <i class="devicon-typescript-plain colored" title="TypeScript" aria-label="TypeScript"></i>
+            <i class="devicon-javascript-plain colored" title="JavaScript" aria-label="JavaScript"></i>
+            <i class="devicon-angular-plain colored" title="Angular" aria-label="Angular"></i>
+            <i class="devicon-redux-original colored" title="Redux" aria-label="Redux"></i>
+            <i class="devicon-nodejs-plain colored" title="Node.js" aria-label="Node.js"></i>
+            <i class="devicon-html5-plain colored" title="HTML5" aria-label="HTML5"></i>
+            <i class="devicon-css3-plain colored" title="CSS3" aria-label="CSS3"></i>
+            <i class="devicon-sass-original colored" title="Sass" aria-label="Sass"></i>
+            <i class="devicon-bootstrap-plain colored" title="Bootstrap" aria-label="Bootstrap"></i>
+            <i class="devicon-tailwindcss-original colored" title="Tailwind CSS" aria-label="Tailwind CSS"></i>
+            <i class="devicon-materialui-plain colored" title="Material UI" aria-label="Material UI"></i>
+            <i class="devicon-vitejs-plain colored" title="Vite" aria-label="Vite"></i>
+            <i class="devicon-jest-plain colored" title="Jest" aria-label="Jest"></i>
+            <i class="devicon-docker-plain colored" title="Docker" aria-label="Docker"></i>
+            <i class="devicon-amazonwebservices-plain-wordmark colored" title="AWS" aria-label="AWS"></i>
+            <i class="devicon-jenkins-plain colored" title="Jenkins" aria-label="Jenkins"></i>
+            <i class="devicon-git-plain colored" title="Git" aria-label="Git"></i>
+            <i class="devicon-figma-plain colored" title="Figma" aria-label="Figma"></i>
+            <i class="devicon-storybook-plain colored" title="Storybook" aria-label="Storybook"></i>
+          </div>
 
+          <!-- Categorized breakdown -->
+          <div class="skills-cats">
+            <div class="skill-cat card card-soft">
+              <h3>Languages</h3>
+              <p>JavaScript (ES6+), TypeScript, HTML5, CSS3, SASS/LESS</p>
+            </div>
+            <div class="skill-cat card card-soft">
+              <h3>Frameworks &amp; Libraries</h3>
+              <p>React.js (React 18, JSX, Hooks, Context API), Redux, Angular (2–20), Node.js, Express.js, RxJS, NgRx</p>
+            </div>
+            <div class="skill-cat card card-soft">
+              <h3>UI &amp; Data Viz</h3>
+              <p>Material UI (MUI), AG Grid, AmCharts, Angular Material, Bootstrap, Tailwind CSS</p>
+            </div>
+            <div class="skill-cat card card-soft">
+              <h3>Design &amp; UX</h3>
+              <p>Figma (mockups, components, design-spec / CSS inspection), wireframing, design hand-off, responsive &amp; accessible UI</p>
+            </div>
+            <div class="skill-cat card card-soft">
+              <h3>Architecture</h3>
+              <p>Micro-Frontends, Module Federation, design system / shared component library, Storybook, SPA &amp; PWA</p>
+            </div>
+            <div class="skill-cat card card-soft">
+              <h3>Build &amp; Testing</h3>
+              <p>Vite, esbuild, Webpack, Rollup, Babel, npm · Jest, React Testing Library, Cypress (e2e), Enzyme, Jasmine, Karma, TDD</p>
+            </div>
+            <div class="skill-cat card card-soft">
+              <h3>CI/CD &amp; DevOps</h3>
+              <p>Jenkins (Groovy shared libraries), GitHub Actions, Docker, AWS ECS, JFrog Artifactory, SonarQube, Husky / Prettier, Git / GitHub</p>
+            </div>
+            <div class="skill-cat card card-soft">
+              <h3>Analytics</h3>
+              <p>Matomo, Datadog RUM, New Relic Browser, real-user monitoring, custom event &amp; page-view tracking</p>
+            </div>
+            <div class="skill-cat card card-soft">
+              <h3>GenAI / AI</h3>
+              <p>LLM integration (Anthropic Claude, Google Gemini), prompt engineering, structured outputs &amp; schema validation, semantic / vector search (consuming embeddings APIs), AI-assisted development (Claude Code)</p>
+            </div>
+            <div class="skill-cat card card-soft">
+              <h3>APIs &amp; Web</h3>
+              <p>RESTful APIs, JSON, AJAX, JWT auth, DOM &amp; JavaScript object model</p>
+            </div>
+            <div class="skill-cat card card-soft">
+              <h3>Accessibility &amp; Compliance</h3>
+              <p>Section 508, WCAG 2.x, ARIA, JAWS, NVDA, Axe, WAVE · HIPAA, FedRAMP / FISMA</p>
+            </div>
+            <div class="skill-cat card card-soft">
+              <h3>Practices &amp; Tools</h3>
+              <p>Agile / Scrum, code reviews, mentoring, Jira</p>
+            </div>
+          </div>
 
           <h2 class="description-main-heading">Education</h2>
 
-<!-- Master's Degree -->
-<div class="about-edu-tabs card card-soft">
-  <b>Master's Degree</b> in Computer Science from
-  <a href="https://www.ucmo.edu" target="_blank" rel="noopener noreferrer">
-    University of Central Missouri
-  </a>, USA.
-  <span class="fromTo">August 2016 – December 2017</span>
-</div>
+          <!-- Master's Degree -->
+          <div class="about-edu-tabs card card-soft">
+            <b>Master of Science, Computer Science</b> —
+            <a href="https://www.ucmo.edu" target="_blank" rel="noopener noreferrer">
+              University of Central Missouri
+            </a>, USA.
+            <span class="fromTo">Aug 2016 – Dec 2017</span>
+          </div>
 
-<!-- Bachelor's Degree -->
-<div class="about-edu-tabs card card-soft">
-  <b>Bachelor of Technology</b> in Computer Science & Engineering from
-  <a href="https://www.annauniv.edu" target="_blank" rel="noopener noreferrer">
-    Anna University
-  </a>, Tamil Nadu.
-  <span class="fromTo">August 2012 – July 2016</span>
-</div>
+          <!-- Bachelor's Degree -->
+          <div class="about-edu-tabs card card-soft">
+            <b>Bachelor of Science, Computer Science</b> —
+            <a href="https://www.annauniv.edu" target="_blank" rel="noopener noreferrer">
+              Anna University
+            </a>, India.
+            <span class="fromTo">2012 – 2016</span>
+          </div>
 
         </div>
       </div>
     </section>
 
     <!-- WORK -->
-<section class="section section-work" ng-show="vm.tab === 3">
-  <img src="workTieImage.jpg" class="bg bg-rest-not-home" alt="Work background" />
-  <div class="overlay"></div>
+    <section class="section section-work" ng-show="vm.tab === 3">
+      <img src="workTieImage.jpg" class="bg bg-rest-not-home" alt="" aria-hidden="true" />
+      <div class="overlay"></div>
 
-  <div class="container">
-    <div class="row intro-text-outerbox text-center">
-      <div class="col-md-12">
-        <h1 class="introText introText-name introText-name-work text-animation">
-          Experience
-        </h1>
-        <p class="inroText-role introText text-animation">
-          Overview of my recent work
-        </p>
-      </div>
-    </div>
-
-    <!-- Add 'animate' class when the Work tab is active to re-trigger the animation -->
-    <div class="timeline" ng-class="{'animate': vm.tab === 3}">
-      <!-- Ventera -->
-      <div class="timeline-item card">
-        <h3>MEAN/MERN Stack Developer • UI Lead</h3>
-        <p>
-          <b>Ventera Corporation / CMS</b>
-          <span class="experience-period">Mar 2019 – Present • Leesburg, VA</span>
-        </p>
-        <ul class="bullets compact">
-          <li>Built & maintained responsive UIs in <b>Angular 10+</b> and <b>ReactJS</b> with HTML5, CSS3/SASS, Bootstrap.</li>
-          <li>Developed <b>Node.js/Express</b> microservices & REST APIs; integrated internal CMS.gov services.</li>
-          <li>Delivered Section <b>508 accessibility</b> compliance and performance optimizations.</li>
-          <li>Drove CI/CD with <b>Git/GitHub</b> and <b>Jenkins</b>; authored unit/integration tests (Jest, Karma, Protractor).</li>
-          <li>Followed <b>Agile/Scrum</b> ceremonies, code reviews, and documentation best practices.</li>
-        </ul>
-      </div>
-
-      <!-- Pioneer / UHG -->
-      <div class="timeline-item card">
-        <h3>MERN Stack / React Developer</h3>
-        <p>
-          <b>Pioneer Consulting (UHG/Optum – BEACH)</b>
-          <span class="experience-period">Jan 2018 – Feb 2019 • Hartford, CT</span>
-        </p>
-        <ul class="bullets compact">
-          <li>Built features for the <b>Benefit Eligibility And Coverage Hub (BEACH)</b> used by UHG employees.</li>
-          <li>Stack: <b>Angular</b>, <b>Node.js</b>, <b>MongoDB</b>; implemented group/member-level benefit views.</li>
-        </ul>
-      </div>
-
-      <!-- (Optional) keep earlier roles if you want a longer timeline -->
-      <!--
-      <div class="timeline-item card">
-        <h3>MEAN Stack Developer / Sr. NodeJS Developer</h3>
-        <p>Televox Software <span class="experience-period">Jul 2016 – Mar 2018</span></p>
-      </div>
-      -->
-    </div>
-  </div>
-</section>
-
-
-  <!-- CONTACT -->
-<section class="section section-contact" ng-show="vm.tab === 4">
-  <img src="connectMe.jpg" class="bg bg-rest-not-home" alt="Contact background" />
-  <div class="overlay"></div>
-
-  <div class="container">
-    <div class="intro-text-outerbox text-center">
-      <h1 class="introText introText-name text-animation">Contact Me</h1>
-      <p class="inroText-role introText text-animation">
-        I’m available for short-term to long-term contract roles across the US.
-      </p>
-    </div>
-
-   <div class="row cnt-form-box">
-  <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 form-innerBox card card-soft">
-    <!-- Toast lives here -->
-    <div id="contactToast" class="toast-inline" aria-live="polite" aria-atomic="true"></div>
-
-    <h2 class="cnt-form-text">Contact Form</h2>
-
-    <form id="contactForm" action="https://formspree.io/f/xqalngpk" method="POST">
-      <div class="row">
-        <div class="form-group col-sm-6">
-          <label class="sr-only" for="firstName">First name</label>
-          <input id="firstName" name="firstName" type="text" class="form-control" placeholder="First name" required />
+      <div class="container">
+        <div class="row intro-text-outerbox text-center">
+          <div class="col-md-12">
+            <h1 class="introText introText-name introText-name-work text-animation">
+              Experience
+            </h1>
+            <p class="inroText-role introText text-animation">
+              Overview of my recent work
+            </p>
+          </div>
         </div>
-        <div class="form-group col-sm-6">
-          <label class="sr-only" for="lastName">Last name</label>
-          <input id="lastName" name="lastName" type="text" class="form-control" placeholder="Last name" />
+
+        <!-- Add 'animate' class when the Work tab is active to re-trigger the animation -->
+        <div class="timeline" ng-class="{'animate': vm.tab === 3}">
+          <!-- Cadmus Group -->
+          <div class="timeline-item card">
+            <h3>Senior UI / Front-End Engineer</h3>
+            <p>
+              <b>Cadmus Group — CMS</b>
+              <span class="experience-period">Mar 2019 – Present • Reston, VA (Remote)</span>
+            </p>
+            <p class="role-context">
+              QualityNet Platform (QNP) — CMS’s secure federal healthcare-quality-reporting platform across six mandated programs; ~1.3M+ sessions and 3.8M+ pageviews/year; built to HIPAA, Section 508, and FedRAMP / FISMA standards.
+            </p>
+            <ul class="bullets compact">
+              <li>Architected a <b>Module Federation</b> micro-frontend platform (Vite) hosting multiple independently deployable React and Angular apps behind a shared authentication shell and a private design-system / component library (Storybook).</li>
+              <li>Lead <b>React</b> development (React 18, Hooks, Context API, Redux, TypeScript) — translating Figma designs into reusable components and data dashboards that consume RESTful APIs.</li>
+              <li>Built the React/TypeScript front end for an internal <b>AI-powered semantic document-search</b> tool over CMS policy PDFs — ranked results with source metadata, consuming a vector-search API.</li>
+              <li>Deliver and oversee <b>Angular</b> (through v20) reporting/admin apps using RxJS and NgRx.</li>
+              <li>Cut production build times <b>~5–10×</b> by migrating to esbuild-based tooling; tuned bundling and load performance.</li>
+              <li>Set front-end standards, run code reviews, and mentor developers; partner closely with UX in Figma.</li>
+              <li>Front-end CI/CD: reusable Jenkins shared-library functions (Groovy), Docker / AWS ECS, SonarQube, and Section 508 quality gates.</li>
+              <li>Deliver full <b>Section 508 / WCAG</b> accessibility (JAWS, NVDA, Axe).</li>
+            </ul>
+          </div>
+
+          <!-- UnitedHealth Group / Optum -->
+          <div class="timeline-item card">
+            <h3>Senior React Developer</h3>
+            <p>
+              <b>UnitedHealth Group / Optum</b> (contract via Pioneer Consulting Services)
+              <span class="experience-period">Jul 2018 – Feb 2019 • Hartford, CT</span>
+            </p>
+            <p class="role-context">
+              Built the front end of BEACH (Benefit Eligibility and Coverage Hub), a benefits-browser app for plan coverage, copays, deductibles, and coinsurance.
+            </p>
+            <ul class="bullets compact">
+              <li>Built fast, responsive UIs in <b>React and TypeScript</b> — reduced page-load times 30% and improved Lighthouse scores 20+ points.</li>
+              <li>Rich data visualizations with <b>AG Grid</b> (large datasets) and <b>AmCharts</b> (analytics).</li>
+              <li>Implemented <b>Material UI</b> components and a reusable component library.</li>
+              <li>Managed state with <b>Redux</b>; cut initial bundle size 40% with lazy loading and route-based code splitting.</li>
+              <li>80%+ unit-test coverage (Jest, React Testing Library, Enzyme) plus Cypress e2e; built supporting Node.js / Express REST APIs.</li>
+            </ul>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="row">
-        <div class="form-group col-sm-6">
-          <label class="sr-only" for="inputEmail">Email</label>
-          <input id="inputEmail" name="email" type="email" class="form-control" placeholder="Email" required />
+    <!-- PROJECTS -->
+    <section class="section section-projects" ng-show="vm.tab === 5">
+      <img src="laptopBackground.jpg" class="bg bg-rest-not-home" alt="" aria-hidden="true" />
+      <div class="overlay"></div>
+
+      <div class="container">
+        <div class="intro-text-outerbox text-center">
+          <h1 class="introText introText-name text-animation">Projects</h1>
+          <p class="inroText-role introText text-animation">
+            A few things I’ve built end-to-end
+          </p>
         </div>
-        <div class="form-group col-sm-6">
-          <label class="sr-only" for="inputPhone">Phone</label>
-          <input id="inputPhone" name="phone" type="tel" class="form-control" placeholder="Phone" />
+
+        <div class="projects-grid">
+          <!-- The Big Screen Index -->
+          <div class="project-card card card-soft">
+            <h3>The Big Screen Index</h3>
+            <p class="project-subtitle">GenAI Editorial Automation Platform</p>
+            <p class="project-tech">TypeScript · Anthropic Claude API · Puppeteer · GitHub Actions · Cloudflare R2</p>
+            <p class="project-desc">
+              A production GenAI platform that auto-generates publication-grade Instagram carousels and reels from structured data. Integrates the Claude API with prompt engineering and schema-validated, type-safe structured outputs, and automates rendering + delivery end-to-end via Puppeteer and GitHub Actions (built through an agentic Claude Code workflow).
+            </p>
+            <a class="btn btn-accent project-link" href="https://github.com/sumanthvenkata03/ott-weekend-bot" target="_blank" rel="noopener">
+              <span class="glyphicon glyphicon-link" aria-hidden="true"></span> View on GitHub
+            </a>
+          </div>
+
+          <!-- Astro Match -->
+          <div class="project-card card card-soft">
+            <h3>Astro Match</h3>
+            <p class="project-subtitle">Vedic Compatibility PWA</p>
+            <p class="project-tech">Angular 19 · TypeScript · Free-Astrology-API · Google Gemini · Vercel</p>
+            <p class="project-desc">
+              An Angular 19 PWA for 36-point Vedic Ashtakoot compatibility matching. Integrates an LLM (Gemini) for bilingual narrative output. Built and deployed end-to-end.
+            </p>
+            <a class="btn btn-accent project-link" href="https://astro-match-nu.vercel.app/" target="_blank" rel="noopener">
+              <span class="glyphicon glyphicon-link" aria-hidden="true"></span> View Live
+            </a>
+          </div>
+
+          <!-- AI-Powered Semantic Search -->
+          <div class="project-card card card-soft">
+            <h3>AI-Powered Semantic Search (CMS)</h3>
+            <p class="project-subtitle">Internal document-search front end</p>
+            <p class="project-tech">React · TypeScript · Vite</p>
+            <p class="project-desc">
+              Built the React/TypeScript front end for an internal semantic document-search tool over CMS policy PDFs, rendering ranked results (document, page, relevance) from a vector-search API.
+            </p>
+            <span class="project-internal">Internal project — no public link</span>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="form-group">
-        <label class="sr-only" for="message">Message</label>
-        <textarea id="message" name="message" class="form-control" rows="4" placeholder="Message" required></textarea>
+    <!-- CONTACT -->
+    <section class="section section-contact" ng-show="vm.tab === 4">
+      <img src="connectMe.jpg" class="bg bg-rest-not-home" alt="" aria-hidden="true" />
+      <div class="overlay"></div>
+
+      <div class="container">
+        <div class="intro-text-outerbox text-center">
+          <h1 class="introText introText-name text-animation">Contact Me</h1>
+          <p class="inroText-role introText text-animation">
+            I’m open to senior / lead / principal front-end and full-stack roles — remote or DC-metro. Let’s talk.
+          </p>
+        </div>
+
+        <div class="contact-details text-center">
+          <a href="mailto:sumanth.techie9@gmail.com">
+            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> sumanth.techie9@gmail.com
+          </a>
+          <span class="contact-sep">·</span>
+          <a href="tel:+18154960803">
+            <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> +1 815-496-0803
+          </a>
+          <span class="contact-sep">·</span>
+          <span class="contact-loc">
+            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Leesburg, VA
+          </span>
+        </div>
+
+        <div class="row cnt-form-box">
+          <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 form-innerBox card card-soft">
+            <!-- Toast lives here -->
+            <div id="contactToast" class="toast-inline" aria-live="polite" aria-atomic="true"></div>
+
+            <h2 class="cnt-form-text">Contact Form</h2>
+
+            <form id="contactForm" action="https://formspree.io/f/xqalngpk" method="POST">
+              <div class="row">
+                <div class="form-group col-sm-6">
+                  <label class="sr-only" for="firstName">First name</label>
+                  <input id="firstName" name="firstName" type="text" class="form-control" placeholder="First name" required />
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="sr-only" for="lastName">Last name</label>
+                  <input id="lastName" name="lastName" type="text" class="form-control" placeholder="Last name" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-sm-6">
+                  <label class="sr-only" for="inputEmail">Email</label>
+                  <input id="inputEmail" name="email" type="email" class="form-control" placeholder="Email" required />
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="sr-only" for="inputPhone">Phone</label>
+                  <input id="inputPhone" name="phone" type="tel" class="form-control" placeholder="Phone" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="sr-only" for="message">Message</label>
+                <textarea id="message" name="message" class="form-control" rows="4" placeholder="Message" required></textarea>
+              </div>
+
+              <input type="hidden" name="formName" value="Portfolio Contact" />
+              <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+              <button type="submit" class="btn btn-accent submitButton">Submit</button>
+            </form>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <input type="hidden" name="formName" value="Portfolio Contact" />
-      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+    <!-- AJAX submit to keep user on page -->
+    <script>
+      (function(){
+        var form = document.getElementById('contactForm');
+        var toast = document.getElementById('contactToast');
+        if (!form || !toast) return;
 
-      <button type="submit" class="btn btn-accent submitButton">Submit</button>
-    </form>
-  </div>
-</div>
+        function showToast(message, type) {
+          toast.className = 'toast-inline ' + (type || 'success');
+          toast.innerHTML = message + '<div class="toast-progress"><i></i></div>';
+          toast.classList.add('show');
 
-  </div>
-</section>
-
-<!-- AJAX submit to keep user on page -->
-<script>
-  (function(){
-    var form = document.getElementById('contactForm');
-    var toast = document.getElementById('contactToast');
-    if (!form || !toast) return;
-
-    function showToast(message, type) {
-      toast.className = 'toast-inline ' + (type || 'success');
-      toast.innerHTML = message + '<div class="toast-progress"><i></i></div>';
-      toast.classList.add('show');
-
-      // hide after 8s
-      setTimeout(function(){
-        toast.classList.remove('show');
-      }, 8000);
-    }
-
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      var data = new FormData(form);
-
-      fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      }).then(function(response){
-        if (response.ok) {
-          form.reset();
-          showToast('✅ Thanks! Your message has been sent.', 'success');
-        } else {
-          return response.json().then(function(data){
-            throw new Error(data.errors ? data.errors.map(e => e.message).join(', ') : 'Submission failed');
-          });
+          // hide after 8s
+          setTimeout(function(){
+            toast.classList.remove('show');
+          }, 8000);
         }
-      }).catch(function(err){
-        showToast('❌ Oops, there was a problem: ' + err.message, 'error');
-      });
-    });
-  })();
-</script>
 
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          var data = new FormData(form);
+
+          fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          }).then(function(response){
+            if (response.ok) {
+              form.reset();
+              showToast('✅ Thanks! Your message has been sent.', 'success');
+            } else {
+              return response.json().then(function(data){
+                throw new Error(data.errors ? data.errors.map(function(err){ return err.message; }).join(', ') : 'Submission failed');
+              });
+            }
+          }).catch(function(err){
+            showToast('❌ Oops, there was a problem: ' + err.message, 'error');
+          });
+        });
+      })();
+    </script>
 
   </main>
 
@@ -318,14 +463,14 @@
   <footer class="footerr">
     <h2 class="logo_heading">Let’s Connect</h2>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 image_logo_outer text-center">
-      <a href="https://github.com/sumanthvenkata03" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/sumanthvenkata03" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
         <img class="logoImage" src="assets/logo/git.svg" alt="GitHub" />
       </a>
-      <a href="https://plus.google.com/u/0/111676802561038622558" target="_blank" rel="noopener noreferrer">
-        <img class="logoImage" src="assets/logo/gplus.png" alt="Google Plus" />
-      </a>
-      <a href="https://www.linkedin.com/in/sumanth-venkata-156690159/" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.linkedin.com/in/sumanth-venkata-156690159/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
         <img class="logoImage" src="assets/logo/linkedin.png" alt="LinkedIn" />
+      </a>
+      <a href="mailto:sumanth.techie9@gmail.com" class="footer-email" aria-label="Email">
+        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
       </a>
     </div>
   </footer>
@@ -333,7 +478,7 @@
   <!-- Your AngularJS app -->
   <script src="module.js"></script>
 
-  <!-- jQuery (optional, only if you need Bootstrap JS collapse) -->
+  <!-- jQuery (for Bootstrap JS collapse) -->
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
   <script
     src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
