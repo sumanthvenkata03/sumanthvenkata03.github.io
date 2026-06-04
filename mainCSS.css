@@ -182,55 +182,10 @@ button:focus-visible,
 .bullets { margin: 10px 0 0 0; padding-left: 18px; color: #cbd1d8; }
 .bullets.compact li { margin: 6px 0; line-height: 1.45; }
 
-/* Work: base reveal state */
-.section-work .timeline .timeline-item {
-  opacity: 0;
-  transform: translateY(18px);
-}
-
-/* Legacy keyframe (harmless if unused) */
-@keyframes riseIn { to { opacity: 1; transform: translateY(0); } }
-
-/* Fancy border draw + content fade-in (slower version) */
-.section-work .timeline.animate .timeline-item {
-  animation: cardFadeIn 1s ease-out forwards, borderDraw 1.2s ease-out forwards;
-  animation-fill-mode: forwards;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Stagger the delay */
-.section-work .timeline.animate .timeline-item:nth-child(1) { animation-delay: 0s, 0s; }
-.section-work .timeline.animate .timeline-item:nth-child(2) { animation-delay: .2s, .2s; }
-.section-work .timeline.animate .timeline-item:nth-child(3) { animation-delay: .4s, .4s; }
-.section-work .timeline.animate .timeline-item:nth-child(4) { animation-delay: .6s, .6s; }
-.section-work .timeline.animate .timeline-item:nth-child(5) { animation-delay: .8s, .8s; }
-.section-work .timeline.animate .timeline-item:nth-child(6) { animation-delay: 1s, 1s; }
-
-/* Card fade-in + lift */
-@keyframes cardFadeIn {
-  0%   { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-/* Border draw animation */
-@keyframes borderDraw {
-  0%   { box-shadow: inset 0 0 0 0 var(--accent); }
-  100% { box-shadow: inset 4px 0 0 0 var(--accent); }
-}
-
-/* Extra shimmer overlay for style */
-.timeline-item.card::after {
-  content: "";
-  position: absolute; top: 0; left: -75%;
-  width: 50%; height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.15), transparent);
-  transform: skewX(-20deg);
-}
-.section-work .timeline.animate .timeline-item::after {
-  animation: shimmer 1.5s ease-out forwards;
-}
-@keyframes shimmer { 100% { left: 125%; } }
+/* Work timeline entrance is handled by the unified scroll-reveal system
+   (see "Premium animation system" at the end of this file). The old
+   CSS-only opacity:0 base + Angular .animate trigger was removed because
+   it hid the timeline when JS was unavailable. */
 
 /* Contact */
 .cnt-form-box { margin-top: 24px; text-align: center; }
@@ -386,11 +341,6 @@ button:focus-visible,
   * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 }
 
-/* Slightly shorter animation on very small screens (snappier) */
-@media (max-width: 480px) {
-  .section-work .timeline.animate .timeline-item { animation-duration: .9s, 1.1s; } /* cardFadeIn, borderDraw */
-  .section-work .timeline.animate .timeline-item::after { animation-duration: 1.2s; } /* shimmer */
-}
 /* Toast Styles */
 /* Make the card a positioning context for the toast */
 .form-innerBox { position: relative; }
@@ -627,4 +577,173 @@ button:focus-visible,
 }
 @media (max-width: 767px) {
   .footer-email { width: 40px; height: 40px; font-size: 18px; margin: 8px 6px; }
+}
+
+/* =========================================================================
+   Premium animation system
+   - GPU-friendly: animates ONLY transform + opacity
+   - No-JS safe: hidden states apply ONLY under html.js (added by JS)
+   - Honors prefers-reduced-motion (everything snaps visible + static)
+   ========================================================================= */
+
+/* ---- PART A: Scroll-reveal ---- */
+/* Hidden state applies ONLY when JS is active (no-JS = fully visible) */
+html.js .reveal        { opacity: 0; transform: translateY(26px); }
+html.js .reveal-left   { opacity: 0; transform: translateX(-30px); }
+html.js .reveal-right  { opacity: 0; transform: translateX(30px); }
+html.js .reveal-scale  { opacity: 0; transform: scale(.93); }
+
+.reveal, .reveal-left, .reveal-right, .reveal-scale {
+  transition: opacity .6s ease, transform .7s cubic-bezier(.22,.61,.36,1);
+  transition-delay: calc(var(--rev-i, 0) * 90ms);   /* stagger within a group */
+  will-change: opacity, transform;
+}
+/* `html.js` prefix here is required: the hidden rule above is `html.js .reveal`
+   (specificity 0,2,1 because of the `html` type selector), so the revealed
+   state must match that specificity or the element stays at opacity:0. */
+html.js .reveal.in-view, html.js .reveal-left.in-view,
+html.js .reveal-right.in-view, html.js .reveal-scale.in-view {
+  opacity: 1; transform: none;
+}
+
+/* ---- PART B: Hero entrance + animated name + photo glow ---- */
+/* Staggered hero entrance on load (CSS-only; runs without JS) */
+.hero-inner > * {
+  opacity: 0; transform: translateY(18px);
+  animation: heroIn .8s cubic-bezier(.22,.61,.36,1) forwards;
+}
+.hero-inner > *:nth-child(1){ animation-delay:.10s }
+.hero-inner > *:nth-child(2){ animation-delay:.22s }
+.hero-inner > *:nth-child(3){ animation-delay:.34s }
+.hero-inner > *:nth-child(4){ animation-delay:.46s }
+.hero-inner > *:nth-child(5){ animation-delay:.58s }
+.hero-inner > *:nth-child(6){ animation-delay:.70s }
+@keyframes heroIn { to { opacity: 1; transform: none; } }
+
+/* Profile photo: entrance + glow + gentle float.
+   heroIn (with `both`) restores opacity so it isn't trapped at 0,
+   then floaty drives the transform afterwards. */
+.profile-pic {
+  box-shadow: 0 0 0 4px rgba(94,234,212,.18), 0 12px 36px rgba(15,118,110,.35);
+  animation: heroIn .8s cubic-bezier(.22,.61,.36,1) .10s both,
+             floaty 6s ease-in-out 1.1s infinite;
+}
+@keyframes floaty { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-8px) } }
+
+/* Hero name: slow gradient "shine" (teal -> white -> teal). Scoped to the hero
+   so other section headings keep their own entrance. Fallback color first. */
+.section-hero .introText-name { color: #fff; }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .section-hero .introText-name {
+    background: linear-gradient(90deg, #5EEAD4, #ffffff 40%, #0F766E 70%, #5EEAD4);
+    background-size: 200% auto;
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent; -webkit-text-fill-color: transparent;
+    /* entrance (heroIn `both` restores visibility) then the looping shine */
+    animation: heroIn .8s cubic-bezier(.22,.61,.36,1) .22s both,
+               nameShine 6s linear 1.1s infinite;
+  }
+  /* keep the accent span inside the gradient too */
+  .section-hero .introText-name .accent { color: inherit; -webkit-text-fill-color: inherit; }
+}
+@keyframes nameShine { to { background-position: 200% center; } }
+
+/* Drifting gradient orbs in the hero overlay — cheap depth (transform only) */
+.section-hero .hero-overlay::before,
+.section-hero .hero-overlay::after {
+  content: ""; position: absolute; border-radius: 50%;
+  filter: blur(60px); pointer-events: none; z-index: -1;
+}
+.section-hero .hero-overlay::before {
+  width: 46vw; max-width: 520px; aspect-ratio: 1; top: -8%; left: -6%;
+  background: radial-gradient(circle, rgba(94,234,212,.22), transparent 70%);
+  animation: orbDriftA 22s ease-in-out infinite;
+}
+.section-hero .hero-overlay::after {
+  width: 52vw; max-width: 600px; aspect-ratio: 1; bottom: -12%; right: -8%;
+  background: radial-gradient(circle, rgba(31,56,100,.30), transparent 70%);
+  animation: orbDriftB 26s ease-in-out infinite;
+}
+@keyframes orbDriftA { 0%,100%{ transform: translate(0,0) } 50%{ transform: translate(28px,34px) } }
+@keyframes orbDriftB { 0%,100%{ transform: translate(0,0) } 50%{ transform: translate(-32px,-26px) } }
+
+/* ---- PART C: Micro-interactions ---- */
+/* Card lift + teal glow */
+.card, .skill-card, .projects-grid > *, .timeline-item, .skills-cats > * {
+  transition: transform .25s cubic-bezier(.22,.61,.36,1), box-shadow .25s, border-color .25s;
+}
+.card:hover, .skill-card:hover, .projects-grid > *:hover, .skills-cats > *:hover {
+  transform: translateY(-6px);
+  border-color: rgba(94,234,212,.45);
+  box-shadow: 0 18px 40px rgba(0,0,0,.45), 0 0 0 1px rgba(94,234,212,.25), 0 0 28px rgba(15,118,110,.22);
+}
+/* Keep the contact form stable while typing (glow only, no lift) */
+.form-innerBox:hover { transform: none; }
+
+/* Button shine sweep on hover */
+.btn-accent { position: relative; overflow: hidden; }
+.btn-accent::after {
+  content:""; position:absolute; top:0; left:-120%; width:55%; height:100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.35), transparent);
+  transform: skewX(-20deg); pointer-events:none;
+}
+.btn-accent:hover::after { animation: btnShine .8s ease; }
+@keyframes btnShine { to { left: 150%; } }
+
+/* Tech icon bouncy hover (merged with the base .tech-strip i transition) */
+.tech-strip i {
+  display: inline-block;
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1), filter .25s;
+}
+.tech-strip i:hover { transform: translateY(-4px) scale(1.18); }
+
+/* Animated nav underline */
+.custom-nav .navbar-nav > li > a { position: relative; }
+.custom-nav .navbar-nav > li > a::after {
+  content:""; position:absolute; left:14px; right:14px; bottom:8px; height:2px;
+  background: linear-gradient(90deg, #5EEAD4, #0F766E);
+  transform: scaleX(0); transform-origin: left; transition: transform .3s ease;
+}
+.custom-nav .navbar-nav > li.active > a::after,
+.custom-nav .navbar-nav > li > a:hover::after { transform: scaleX(1); }
+/* don't draw an underline under the Resume button */
+.custom-nav .navbar-nav > li > a.btn::after { display: none; }
+
+/* ---- PART D: Scroll progress bar ---- */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 100%;
+  transform: scaleX(0); transform-origin: left;
+  background: linear-gradient(90deg, #5EEAD4, #0F766E);
+  z-index: 2000;            /* above the fixed navbar (Bootstrap 1030) */
+  pointer-events: none;
+}
+
+/* ---- PART E: Count-up stat strip ---- */
+.stat-strip {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 14px 36px; margin: 28px auto 4px; max-width: 640px; padding: 0 12px;
+}
+.stat { min-width: 120px; text-align: center; }
+.stat .count {
+  display: block; font-weight: 800; line-height: 1.05;
+  font-size: clamp(30px, 8vw, 44px); color: var(--teal-light);
+  text-shadow: 0 2px 18px rgba(15,118,110,.45);
+}
+.stat small { display: block; margin-top: 4px; color: var(--muted); font-weight: 600; font-size: 13px; }
+@media (max-width: 575px) {
+  .stat-strip { gap: 16px; flex-direction: column; }
+}
+
+/* ---- Reduced-motion: disable all of the above, show everything ---- */
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal, html.js .reveal-left, html.js .reveal-right, html.js .reveal-scale {
+    opacity: 1 !important; transform: none !important; transition: none !important;
+  }
+  .hero-inner > * { animation: none; opacity: 1; transform: none; }
+  .section-hero .introText-name { animation: none; }
+  .profile-pic { animation: none; }
+  .section-hero .hero-overlay::before,
+  .section-hero .hero-overlay::after { animation: none; }
+  .btn-accent:hover::after { animation: none; }
+  .scroll-progress { display: none; }
 }
