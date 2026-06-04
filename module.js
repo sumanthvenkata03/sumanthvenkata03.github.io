@@ -20,16 +20,18 @@ app.controller("homeController", function($scope, $window, $timeout) {
     } catch(e) {}
   }, 0);
 
-  // smooth scroll to About section when it becomes active
-  $scope.$watch(function(){ return vm.tab; }, function(nv){
-    if (nv === 2) {
-      $timeout(function(){
-        var el = document.getElementById('secBookmark');
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 50);
-    } else {
-      $window.scrollTo(0,0);
-    }
+  // On every tab switch, jump back to the TOP of the page (instant).
+  // NOTE: html/body have height:100% + overflow-x:hidden, which makes <body>
+  // the scroll container — window.scrollTo alone won't reset it — so reset the
+  // window, documentElement, and body together to cover every engine. Runs in a
+  // 0ms $timeout so it fires after the digest swaps the visible section.
+  $scope.$watch(function(){ return vm.tab; }, function(nv, ov){
+    if (nv === ov) return;
+    $timeout(function(){
+      if ($window.scrollTo) $window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 0);
   });
 });
 
