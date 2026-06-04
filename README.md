@@ -15,8 +15,7 @@ tabbed navigation.
 | --- | --- |
 | `index.html` | The entire single-page site markup (nav, hero, About, Work, Projects, Contact sections). |
 | `mainCSS.css` | All custom styling — layout, theme, responsive/mobile-first rules, and animations. |
-| `module.js` | The AngularJS app + vanilla-JS enhancements (tab switching, scroll-reveal, count-up stats, scroll progress bar). |
-| `assets/images/` | Tech-stack logos shown on the site. |
+| `module.js` | The AngularJS app + vanilla-JS enhancements (tab switching, scroll-reveal, count-up stats, scroll progress bar, cursor-tilt cards). |
 | `assets/logo/` | Social/link icons (GitHub, LinkedIn). |
 | `assets/resume/` | Downloadable PDF résumé. |
 | `*.jpg`, `favicon.ico` | Hero/section background photos and the site favicon. |

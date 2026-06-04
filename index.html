@@ -61,7 +61,7 @@
         <div id="main-nav" class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
             <li ng-class="{active: vm.tab === 1}"><a href="#" ng-click="vm.tab = 1" ng-attr-aria-current="{{vm.tab === 1 ? 'page' : undefined}}">Home</a></li>
-            <li ng-class="{active: vm.tab === 2}"><a href="#secBookmark" ng-click="vm.tab = 2" ng-attr-aria-current="{{vm.tab === 2 ? 'page' : undefined}}">About</a></li>
+            <li ng-class="{active: vm.tab === 2}"><a href="#" ng-click="vm.tab = 2" ng-attr-aria-current="{{vm.tab === 2 ? 'page' : undefined}}">About</a></li>
             <li ng-class="{active: vm.tab === 3}"><a href="#" ng-click="vm.tab = 3" ng-attr-aria-current="{{vm.tab === 3 ? 'page' : undefined}}">Work</a></li>
             <li ng-class="{active: vm.tab === 5}"><a href="#" ng-click="vm.tab = 5" ng-attr-aria-current="{{vm.tab === 5 ? 'page' : undefined}}">Projects</a></li>
             <li ng-class="{active: vm.tab === 4}"><a href="#" ng-click="vm.tab = 4" ng-attr-aria-current="{{vm.tab === 4 ? 'page' : undefined}}">Contact</a></li>
@@ -119,20 +119,20 @@
     </section>
 
     <!-- ABOUT -->
-    <section class="section section-about" id="secBookmark" ng-show="vm.tab === 2">
+    <section class="section section-about" ng-show="vm.tab === 2">
       <img src="aboutMeBackgroundImage.jpg" class="bg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
       <div class="overlay"></div>
 
       <div class="container">
         <div class="intro-text-outerbox text-center">
-          <h1 class="introText introText-name text-animation">About Me</h1>
+          <h1 class="introText introText-name text-animation reveal section-title-underline">About Me</h1>
           <h2 class="inroText-role introText text-animation">
             Professional developer with ~8 years of experience crafting web & front-end applications.
           </h2>
         </div>
 
         <div class="about-me-content-outer">
-          <h2 class="description-main-heading reveal">Technical Skills</h2>
+          <h2 class="description-main-heading reveal section-title-underline">Technical Skills</h2>
 
           <!-- Headline tech (Devicon icon strip) -->
           <div class="tech-strip" aria-label="Headline technologies" data-reveal-group>
@@ -210,7 +210,7 @@
             </div>
           </div>
 
-          <h2 class="description-main-heading reveal">Education</h2>
+          <h2 class="description-main-heading reveal section-title-underline">Education</h2>
 
           <!-- Master's Degree -->
           <div class="about-edu-tabs card card-soft reveal">
@@ -242,7 +242,7 @@
       <div class="container">
         <div class="row intro-text-outerbox text-center">
           <div class="col-md-12">
-            <h1 class="introText introText-name introText-name-work text-animation">
+            <h1 class="introText introText-name introText-name-work text-animation reveal section-title-underline">
               Experience
             </h1>
             <p class="inroText-role introText text-animation">
@@ -304,7 +304,7 @@
 
       <div class="container">
         <div class="intro-text-outerbox text-center">
-          <h1 class="introText introText-name text-animation">Projects</h1>
+          <h1 class="introText introText-name text-animation reveal section-title-underline">Projects</h1>
           <p class="inroText-role introText text-animation">
             A few things I’ve built end-to-end
           </p>
@@ -372,7 +372,7 @@
 
       <div class="container">
         <div class="intro-text-outerbox text-center">
-          <h1 class="introText introText-name text-animation">Contact Me</h1>
+          <h1 class="introText introText-name text-animation reveal section-title-underline">Contact Me</h1>
           <p class="inroText-role introText text-animation">
             I’m open to senior / lead / principal front-end and full-stack roles — remote or DC-metro. Let’s talk.
           </p>

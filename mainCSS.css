@@ -5,8 +5,12 @@
 
 /* Base resets */
 * { box-sizing: border-box; }
-html, body { height: 100%; overflow-x: hidden; max-width: 100%; }
+/* overflow-x: clip prevents sideways scroll WITHOUT making <body> a scroll
+   container, so window.scrollTo can reset to the top on tab switch. No
+   height:100% on body — sections are sized by .section { min-height: 100svh }. */
+html { height: 100%; overflow-x: clip; max-width: 100%; }
 body {
+  overflow-x: clip; max-width: 100%;
   padding-left: 0; padding-right: 0;
   font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
   background: #0e1013;
@@ -35,14 +39,14 @@ body {
 .inroText-role { font-size: clamp(16px, 4.5vw, 20px); font-family: 'Lora', serif; font-style: italic; color: #d2d5d9; }
 .accent { color: var(--accent-text); }
 
-/* Animations */
-.text-animation { position: relative; animation: textMove .8s ease-out; }
-@keyframes textMove { from { top: 14px; opacity: 0 } to { top:0; opacity:1 } }
+/* Animations — GPU-friendly entrance (transform + opacity only, no reflow) */
+.text-animation { animation: textMove .8s ease-out both; }
+@keyframes textMove { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
 /* Cards */
 .card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0,0,0,.35);
   padding: 20px;
@@ -103,6 +107,9 @@ button:focus-visible,
   min-height: 100svh;     /* dynamic viewport height on mobile */
   overflow: hidden;       /* contain shimmer/::after, prevent sideways scroll */
   scroll-margin-top: 84px;/* offset for fixed nav on anchor jumps */
+  /* Vertically center content. min-height (not height) keeps tall sections
+     growing/scrolling normally — only short sections (Contact) get centered. */
+  display: flex; flex-direction: column; justify-content: center;
 }
 .section-hero { padding-top: 140px; }
 .section-about .introText-name,
@@ -139,30 +146,17 @@ button:focus-visible,
   font-size: clamp(22px, 5vw, 32px); font-weight: 800; text-align: center; margin: 20px 0 10px;
 }
 
-/* ===== Skills Grid (compact & aligned) ===== */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 20px;
-  padding: 20px;
+/* Animated gradient underline that draws in when a section heading reveals.
+   NOT applied to the hero name (.section-hero .introText-name) — that keeps
+   its gradient shine clean. Triggered by the .in-view class from scroll-reveal. */
+.section-title-underline { position: relative; padding-bottom: 14px; }
+.section-title-underline::after {
+  content:""; position:absolute; left:50%; bottom:0; transform: translateX(-50%) scaleX(0);
+  transform-origin:center; width: 72px; height: 3px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--teal-light));
+  transition: transform .6s cubic-bezier(.22,.61,.36,1) .15s;
 }
-.skill-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 12px;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform .18s, box-shadow .18s;
-  min-height: 110px;
-}
-.skill-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.35);
-}
-.logo { max-width: 100%; height: auto; display: block; }
-.skill-card img.logo { width: 80px; height: 80px; object-fit: contain; }
+.section-title-underline.in-view::after { transform: translateX(-50%) scaleX(1); }
 
 /* Education blocks */
 .about-edu-tabs { width: 90%; margin: 20px auto; font-size: 16px; }
@@ -296,18 +290,6 @@ button:focus-visible,
   .hero-ctas .btn { width: 100%; }
 }
 
-/* Skills grid tighter on small screens */
-@media (max-width: 991px) {
-  .skills-grid { grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 16px; padding: 16px; }
-  .skill-card { min-height: 100px; padding: 12px; }
-  .skill-card img.logo { width: 70px; height: 70px; }
-}
-@media (max-width: 480px) {
-  .skills-grid { grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 12px; padding: 12px; }
-  .skill-card { min-height: 88px; padding: 10px; }
-  .skill-card img.logo { width: 56px; height: 56px; }
-}
-
 /* Education blocks tweaks */
 @media (max-width: 991px) {
   .about-edu-tabs { width: 94%; font-size: 15px; }
@@ -334,11 +316,6 @@ button:focus-visible,
   .logo_heading { font-size: 20px; }
   .logoImage { width: 40px; height: 40px; margin: 8px 6px; }
   .footerr .image_logo_outer { gap: 12px; }
-}
-
-/* Reduce motion for users who prefer it */
-@media (prefers-reduced-motion: reduce) {
-  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 }
 
 /* Toast Styles */
@@ -479,6 +456,10 @@ button:focus-visible,
   letter-spacing: .3px;
 }
 .skill-cat p { margin: 0; color: #cbd1d8; line-height: 1.5; font-size: 14.5px; }
+
+/* Perspective so the JS cursor-tilt (desktop only) reads as 3D. */
+.projects-grid, .skills-cats { perspective: 900px; }
+.project-card, .skill-cat { transform-style: preserve-3d; }
 
 /* =========================
    Projects grid
@@ -669,10 +650,10 @@ html.js .reveal-right.in-view, html.js .reveal-scale.in-view {
 
 /* ---- PART C: Micro-interactions ---- */
 /* Card lift + teal glow */
-.card, .skill-card, .projects-grid > *, .timeline-item, .skills-cats > * {
+.card, .projects-grid > *, .timeline-item, .skills-cats > * {
   transition: transform .25s cubic-bezier(.22,.61,.36,1), box-shadow .25s, border-color .25s;
 }
-.card:hover, .skill-card:hover, .projects-grid > *:hover, .skills-cats > *:hover {
+.card:hover, .projects-grid > *:hover, .skills-cats > *:hover {
   transform: translateY(-6px);
   border-color: rgba(94,234,212,.45);
   box-shadow: 0 18px 40px rgba(0,0,0,.45), 0 0 0 1px rgba(94,234,212,.25), 0 0 28px rgba(15,118,110,.22);
@@ -736,6 +717,7 @@ html.js .reveal-right.in-view, html.js .reveal-scale.in-view {
 
 /* ---- Reduced-motion: disable all of the above, show everything ---- */
 @media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
   html.js .reveal, html.js .reveal-left, html.js .reveal-right, html.js .reveal-scale {
     opacity: 1 !important; transform: none !important; transition: none !important;
   }

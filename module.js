@@ -1,6 +1,6 @@
 var app = angular.module("app", []);
 
-app.controller("homeController", function($scope, $window, $timeout) {
+app.controller("homeController", function($scope, $timeout) {
   var vm = this;
   $scope.vm = vm; // expose as vm in template
   vm.tab = 1;
@@ -21,17 +21,17 @@ app.controller("homeController", function($scope, $window, $timeout) {
   }, 0);
 
   // On every tab switch, jump back to the TOP of the page (instant).
-  // NOTE: html/body have height:100% + overflow-x:hidden, which makes <body>
-  // the scroll container — window.scrollTo alone won't reset it — so reset the
-  // window, documentElement, and body together to cover every engine. Runs in a
-  // 0ms $timeout so it fires after the digest swaps the visible section.
-  $scope.$watch(function(){ return vm.tab; }, function(nv, ov){
+  // Reset window + every scroll-container candidate to cover all engines,
+  // in a 0ms $timeout so it fires after the digest swaps the visible section.
+  function scrollTop() {
+    window.scrollTo(0, 0);
+    if (document.scrollingElement) document.scrollingElement.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }
+  $scope.$watch(function () { return vm.tab; }, function (nv, ov) {
     if (nv === ov) return;
-    $timeout(function(){
-      if ($window.scrollTo) $window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    }, 0);
+    $timeout(scrollTop, 0);
   });
 });
 
@@ -153,4 +153,21 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('resize', onScroll, { passive: true });
     update();
   }
+})();
+
+/* Cursor-following 3D tilt on cards — desktop pointer only, never on touch
+   or with reduced motion. Layers on top of the CSS hover lift + teal glow. */
+(function () {
+  var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!fine || reduce) return;
+  document.querySelectorAll('.project-card, .skill-cat').forEach(function (card) {
+    card.addEventListener('mousemove', function (e) {
+      var r = card.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = 'translateY(-6px) rotateX(' + (-y * 6) + 'deg) rotateY(' + (x * 6) + 'deg)';
+    });
+    card.addEventListener('mouseleave', function () { card.style.transform = ''; });
+  });
 })();
