@@ -32,3 +32,14 @@ app.controller("homeController", function($scope, $window, $timeout) {
     }
   });
 });
+
+// Mobile nav: collapse the menu after tapping any nav link (Bootstrap 3 'in' class)
+document.addEventListener('DOMContentLoaded', function () {
+  var links = document.querySelectorAll('#main-nav .navbar-nav a');
+  links.forEach(function (a) {
+    a.addEventListener('click', function () {
+      var nav = document.getElementById('main-nav');
+      if (nav && nav.classList.contains('in')) nav.classList.remove('in');
+    });
+  });
+});
