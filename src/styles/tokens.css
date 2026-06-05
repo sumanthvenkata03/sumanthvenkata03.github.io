@@ -1,0 +1,16 @@
+/* Design tokens — ported verbatim from legacy mainCSS.css :root */
+:root {
+  --bg: #0e1013;
+  --card: #14181f;
+  --muted: #9aa0a6;
+  --navy: #1f3864; /* brand navy */
+  --teal: #0f766e; /* brand teal */
+  --teal-light: #5eead4; /* light-teal highlight */
+  --accent: var(--teal); /* structural accent (buttons, bars) */
+  --accent-2: var(--navy);
+  --accent-text: var(--teal-light); /* readable accent on dark text */
+  --white: #fff;
+
+  /* fixed-nav height (new — was implicit 64px in legacy) */
+  --nav-h: 64px;
+}
