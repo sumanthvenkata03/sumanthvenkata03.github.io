@@ -6,6 +6,7 @@ import Footer from './Footer';
 import SkipLink from './SkipLink';
 import Seo from '../ui/Seo';
 import ScrollProgress from '../graphics/ScrollProgress';
+import Analytics from '../../analytics/AnalyticsTracker';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setActiveSection, type SectionId } from '../../store/slices/uiSlice';
 import { useSyncReducedMotion } from '../../hooks/useSyncReducedMotion';
@@ -53,6 +54,7 @@ export default function Layout() {
 
   return (
     <>
+      <Analytics />
       <Seo />
       <ScrollProgress />
       <SkipLink />
