@@ -1,5 +1,9 @@
+import { version as reactVersion } from 'react';
 import AnimationsToggle from '../ui/AnimationsToggle';
+import Reveal from '../ui/Reveal';
 import styles from './Footer.module.css';
+
+const reactMajor = reactVersion.split('.')[0];
 
 export default function Footer() {
   return (
@@ -30,6 +34,23 @@ export default function Footer() {
         </a>
       </div>
       <AnimationsToggle />
+
+      <Reveal variant="up" className={styles.credit}>
+        <span className={styles.creditText}>
+          Built with React {reactMajor} · TypeScript · Vite · Framer Motion
+        </span>
+        <span className={styles.creditSep} aria-hidden="true">
+          ·
+        </span>
+        <a
+          className={styles.creditLink}
+          href="https://github.com/sumanthvenkata03/sumanthvenkata03.github.io"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View source ↗
+        </a>
+      </Reveal>
     </footer>
   );
 }

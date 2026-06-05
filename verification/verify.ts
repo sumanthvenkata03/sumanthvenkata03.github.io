@@ -244,6 +244,8 @@ async function overflowWidth(page: Page): Promise<number> {
       `(() => { const el = document.querySelector('main h2'); return el ? getComputedStyle(el).opacity : '0'; })()`,
     );
     add('reduced-motion: content visible (opacity 1)', op === '1', `opacity ${op}`);
+    const creditVisible = await page.getByRole('link', { name: /view source/i }).isVisible();
+    add('reduced-motion: footer credit visible (static)', creditVisible);
     await ctx.close();
   }
   // normal: scroll-progress present

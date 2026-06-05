@@ -48,6 +48,38 @@
   border: 2px solid rgba(255, 255, 255, 0.6);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
 }
+/* "Built with" tech credit — last line of the footer */
+.credit {
+  max-width: 640px;
+  margin: 18px auto 0;
+  padding: 14px 16px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 8px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--muted);
+  text-align: center;
+}
+.creditSep {
+  color: var(--muted);
+}
+.creditLink {
+  color: var(--teal-light);
+  border-radius: 4px;
+}
+.creditLink:hover,
+.creditLink:focus-visible {
+  text-decoration: underline;
+}
+.creditLink:focus-visible {
+  outline: 2px solid var(--teal-light);
+  outline-offset: 2px;
+}
+
 @media (max-width: 767px) {
   .heading {
     font-size: 20px;
