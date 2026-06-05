@@ -101,6 +101,41 @@ async function overflowWidth(page: Page): Promise<number> {
     await context.close();
   }
 
+  // nav interaction — desktop click + mobile hamburger toggle/auto-collapse
+  {
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    const page = await ctx.newPage();
+    await page.goto(BASE + '/', { waitUntil: 'networkidle' });
+    await page.getByRole('link', { name: 'About', exact: true }).click();
+    await page.waitForTimeout(500);
+    add('nav: click About -> /about', new URL(page.url()).pathname === '/about', page.url());
+    const focusedMain = await page.evaluate(`document.activeElement?.id === 'main'`);
+    add('nav: focus moved to <main> (a11y)', focusedMain === true);
+    // keyboard: focus the Work link and activate with Enter
+    await page.getByRole('link', { name: 'Work', exact: true }).focus();
+    await page.keyboard.press('Enter');
+    await page.waitForTimeout(400);
+    add('nav: keyboard Enter -> /work', new URL(page.url()).pathname === '/work', page.url());
+    await ctx.close();
+  }
+  {
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    const page = await ctx.newPage();
+    await page.goto(BASE + '/', { waitUntil: 'networkidle' });
+    const toggle = page.getByRole('button', { name: /toggle navigation/i });
+    const aboutLink = page.getByRole('link', { name: 'About', exact: true });
+    add('mobile: About hidden before toggle', !(await aboutLink.isVisible()));
+    await toggle.click();
+    await page.waitForTimeout(300);
+    add('mobile: About visible after toggle', await aboutLink.isVisible());
+    await aboutLink.click();
+    await page.waitForTimeout(500);
+    const closedAndNavigated =
+      new URL(page.url()).pathname === '/about' && !(await aboutLink.isVisible());
+    add('mobile: nav -> /about + menu auto-closes', closedAndNavigated, page.url());
+    await ctx.close();
+  }
+
   // external link reachability (opt-in; networky/slow)
   if (process.env.CHECK_LINKS) {
     const ctx = await pwRequest.newContext();
