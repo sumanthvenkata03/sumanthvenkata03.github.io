@@ -65,3 +65,17 @@ select {
 #main:focus {
   outline: none; /* programmatic focus target on route change — no visible ring */
 }
+
+/* Global reduced-motion safety net (ported from legacy). Component CSS adds
+   more specific overrides; Framer Motion is gated separately via useReducedMotion
+   + the Redux animationsEnabled flag. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,1 +1,66 @@
-/* Keyframes — ported verbatim in Phase 2. Placeholder so the import resolves. */
+/* =========================================================================
+   Keyframes — ported VERBATIM from legacy mainCSS.css (values unchanged).
+   Kept global (not CSS-module-scoped) so component modules can reference them.
+   ========================================================================= */
+
+/* Heading entrance (GPU-friendly: transform + opacity) */
+@keyframes textMove {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Hero staggered entrance */
+@keyframes heroIn {
+  to { opacity: 1; transform: none; }
+}
+
+/* Profile photo gentle float */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* Hero name gradient shine */
+@keyframes nameShine {
+  to { background-position: 200% center; }
+}
+
+/* Drifting gradient orbs */
+@keyframes orbDriftA {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(28px, 34px); }
+}
+@keyframes orbDriftB {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(-32px, -26px); }
+}
+
+/* Button shine sweep */
+@keyframes btnShine {
+  to { left: 150%; }
+}
+
+/* Contact toast enter */
+@keyframes toastEnter {
+  0%   { opacity: 0; transform: translate(-50%, -16px); }
+  100% { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* Contact toast breathing glow */
+@keyframes toastGlow {
+  from { box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35); }
+  to   { box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45); }
+}
+
+/* Contact toast progress bar */
+@keyframes toastProgress {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0); }
+}
+
+/* ---- new (additive, Phase 6) ---- */
+/* Animated SVG-style heading underline draw */
+@keyframes underlineDraw {
+  from { transform: translateX(-50%) scaleX(0); }
+  to   { transform: translateX(-50%) scaleX(1); }
+}
