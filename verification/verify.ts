@@ -237,6 +237,22 @@ async function overflowWidth(page: Page): Promise<number> {
     await ctx.close();
   }
 
+  // no-JS: prerendered static HTML must show full content (set CHECK_NOJS=1
+  // after `npm run build:static`)
+  if (process.env.CHECK_NOJS) {
+    const nojsBase = process.env.NOJS_URL || 'http://localhost:4174';
+    const ctx = await browser.newContext({ javaScriptEnabled: false });
+    const page = await ctx.newPage();
+    for (const route of ROUTES) {
+      await page.goto(nojsBase + route.path, { waitUntil: 'domcontentloaded' });
+      const text = (await page.locator('body').textContent()) || '';
+      const needles = (PARITY[route.name] ?? []).slice(0, 4);
+      const ok = needles.every((n) => text.includes(n)) && text.length > 200;
+      add(`no-JS [${route.name}] content present`, ok, `${text.length} chars`);
+    }
+    await ctx.close();
+  }
+
   // external link reachability (opt-in; networky/slow)
   if (process.env.CHECK_LINKS) {
     const ctx = await pwRequest.newContext();
