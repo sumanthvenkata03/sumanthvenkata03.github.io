@@ -3,7 +3,7 @@ import SectionShell from '../../components/ui/SectionShell';
 import Card from '../../components/ui/Card';
 import CountUp from '../../components/ui/CountUp';
 import RichText from '../../components/ui/RichText';
-import { buttonClass } from '../../components/ui/Button';
+import { buttonClass } from '../../components/ui/buttonClass';
 import { HERO } from '../../data/content';
 import styles from './Home.module.css';
 

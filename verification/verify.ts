@@ -267,7 +267,9 @@ async function overflowWidth(page: Page): Promise<number> {
     for (const u of urls) {
       try {
         const r = await ctx.get(u, { timeout: 20_000, maxRedirects: 5 });
-        add(`link ${u}`, r.status() < 400, String(r.status()));
+        // LinkedIn returns 999 to non-browser clients (anti-bot) — link is valid.
+        const ok = r.status() < 400 || (u.includes('linkedin.com') && r.status() === 999);
+        add(`link ${u}`, ok, String(r.status()));
       } catch (e) {
         add(`link ${u}`, false, (e as Error).message);
       }

@@ -4,7 +4,7 @@ import Card from '../../components/ui/Card';
 import Reveal from '../../components/ui/Reveal';
 import Tilt from '../../components/ui/Tilt';
 import Icon from '../../components/ui/Icon';
-import { buttonClass } from '../../components/ui/Button';
+import { buttonClass } from '../../components/ui/buttonClass';
 import { SECTION } from '../../data/content';
 import { PROJECTS } from '../../data/projects';
 import styles from './Projects.module.css';
