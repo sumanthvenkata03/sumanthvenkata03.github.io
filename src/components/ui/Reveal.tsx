@@ -17,6 +17,13 @@ interface Props {
   /** Stagger delay (seconds). */
   delay?: number;
   className?: string;
+  /** Fraction (or 'some'/'all') of the element that must be in view to trigger. */
+  amount?: number | 'some' | 'all';
+  /** IntersectionObserver-style root margin. Default insets the bottom by 8% so
+   *  reveals fire just before the edge — override to '0px' for elements that sit
+   *  at the very bottom of the page (e.g. the footer), which would otherwise
+   *  never leave that dead zone. */
+  margin?: string;
 }
 
 /**
@@ -24,7 +31,14 @@ interface Props {
  * When animations are disabled / reduced-motion, renders a plain, fully-visible
  * element with no transform — content is never hidden.
  */
-export default function Reveal({ children, variant = 'up', delay = 0, className }: Props) {
+export default function Reveal({
+  children,
+  variant = 'up',
+  delay = 0,
+  className,
+  amount = 0.2,
+  margin = '0px 0px -8% 0px',
+}: Props) {
   const active = useAnimationsActive();
   if (!active) {
     return <div className={className}>{children}</div>;
@@ -34,7 +48,7 @@ export default function Reveal({ children, variant = 'up', delay = 0, className 
       className={className}
       initial={HIDDEN[variant]}
       whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
-      viewport={{ once: true, amount: 0.2, margin: '0px 0px -8% 0px' }}
+      viewport={{ once: true, amount, margin }}
       transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1], delay }}
     >
       {children}

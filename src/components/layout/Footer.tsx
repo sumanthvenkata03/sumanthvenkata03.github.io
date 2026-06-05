@@ -35,7 +35,7 @@ export default function Footer() {
       </div>
       <AnimationsToggle />
 
-      <Reveal variant="up" className={styles.credit}>
+      <Reveal variant="up" amount="some" margin="0px" className={styles.credit}>
         <span className={styles.creditText}>
           Built with React {reactMajor} · TypeScript · Vite · Framer Motion
         </span>

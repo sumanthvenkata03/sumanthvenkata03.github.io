@@ -257,6 +257,19 @@ async function overflowWidth(page: Page): Promise<number> {
     add('normal: scroll-progress present', bar === 1, `${bar} bars`);
     await ctx.close();
   }
+  // footer credit must actually reveal at the absolute page bottom (normal motion)
+  {
+    const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+    const page = await ctx.newPage();
+    await page.goto(BASE + '/', { waitUntil: 'networkidle' });
+    await page.evaluate('window.scrollTo(0, document.body.scrollHeight)');
+    await page.waitForTimeout(1000);
+    const op = await page.evaluate(
+      `(() => { const s=[...document.querySelectorAll('footer span')].find(x=>/Built with React/.test(x.textContent||'')); return (s&&s.parentElement)?getComputedStyle(s.parentElement).opacity:'no-el'; })()`,
+    );
+    add('footer credit reveals at page bottom (opacity 1)', op === '1', `opacity ${op}`);
+    await ctx.close();
+  }
 
   // no-JS: prerendered static HTML must show full content (set CHECK_NOJS=1
   // after `npm run build:static`)
