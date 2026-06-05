@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import Orbs from '../graphics/Orbs';
 import styles from './SectionShell.module.css';
 
 interface Props {
@@ -24,6 +25,7 @@ export default function SectionShell({ bgImage, variant = 'default', children, c
           : { loading: 'lazy' as const, decoding: 'async' as const })}
       />
       <div className={isHero ? styles.heroOverlay : styles.overlay} aria-hidden="true" />
+      {isHero ? <Orbs /> : null}
       <div className={styles.container}>{children}</div>
     </section>
   );

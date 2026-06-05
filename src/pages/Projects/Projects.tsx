@@ -2,6 +2,7 @@ import SectionShell from '../../components/ui/SectionShell';
 import SectionHeading from '../../components/ui/SectionHeading';
 import Card from '../../components/ui/Card';
 import Reveal from '../../components/ui/Reveal';
+import Tilt from '../../components/ui/Tilt';
 import Icon from '../../components/ui/Icon';
 import { buttonClass } from '../../components/ui/Button';
 import { SECTION } from '../../data/content';
@@ -17,6 +18,7 @@ export default function Projects() {
       <div className={styles.grid}>
         {PROJECTS.map((p, i) => (
           <Reveal key={p.title} variant="up" delay={(i % 2) * 0.08} className={styles.cell}>
+            <Tilt className={styles.tilt}>
             <Card soft className={`${styles.card} ${p.federal ? styles.federal : ''}`}>
               {p.badge ? (
                 <span className={styles.badge}>
@@ -41,6 +43,7 @@ export default function Projects() {
                 <span className={styles.internal}>{p.internalNote}</span>
               )}
             </Card>
+            </Tilt>
           </Reveal>
         ))}
       </div>

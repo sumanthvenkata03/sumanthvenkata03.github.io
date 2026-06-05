@@ -210,6 +210,33 @@ async function overflowWidth(page: Page): Promise<number> {
     await ctx.close();
   }
 
+  // reduced-motion: animations off, content static & fully visible
+  {
+    const ctx = await browser.newContext({
+      viewport: { width: 1440, height: 900 },
+      reducedMotion: 'reduce',
+    });
+    const page = await ctx.newPage();
+    await page.goto(BASE + '/about', { waitUntil: 'networkidle' });
+    await page.waitForTimeout(300);
+    const bar = await page.locator('[data-testid="scroll-progress"]').count();
+    add('reduced-motion: scroll-progress hidden', bar === 0, `${bar} bars`);
+    const op = await page.evaluate(
+      `(() => { const el = document.querySelector('main h2'); return el ? getComputedStyle(el).opacity : '0'; })()`,
+    );
+    add('reduced-motion: content visible (opacity 1)', op === '1', `opacity ${op}`);
+    await ctx.close();
+  }
+  // normal: scroll-progress present
+  {
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    const page = await ctx.newPage();
+    await page.goto(BASE + '/about', { waitUntil: 'networkidle' });
+    const bar = await page.locator('[data-testid="scroll-progress"]').count();
+    add('normal: scroll-progress present', bar === 1, `${bar} bars`);
+    await ctx.close();
+  }
+
   // external link reachability (opt-in; networky/slow)
   if (process.env.CHECK_LINKS) {
     const ctx = await pwRequest.newContext();

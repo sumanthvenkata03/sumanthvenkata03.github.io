@@ -2,6 +2,7 @@ import SectionShell from '../../components/ui/SectionShell';
 import SectionHeading from '../../components/ui/SectionHeading';
 import Card from '../../components/ui/Card';
 import Reveal from '../../components/ui/Reveal';
+import Tilt from '../../components/ui/Tilt';
 import { SECTION, EDUCATION } from '../../data/content';
 import { TECH_STRIP, SKILL_CATEGORIES } from '../../data/skills';
 import styles from './About.module.css';
@@ -26,10 +27,12 @@ export default function About() {
         <div className={styles.cats}>
           {SKILL_CATEGORIES.map((c, i) => (
             <Reveal key={c.title} variant="up" delay={(i % 3) * 0.06} className={styles.catCell}>
-              <Card soft className={styles.cat}>
-                <h3>{c.title}</h3>
-                <p>{c.body}</p>
-              </Card>
+              <Tilt className={styles.tilt} max={5}>
+                <Card soft className={styles.cat}>
+                  <h3>{c.title}</h3>
+                  <p>{c.body}</p>
+                </Card>
+              </Tilt>
             </Reveal>
           ))}
         </div>

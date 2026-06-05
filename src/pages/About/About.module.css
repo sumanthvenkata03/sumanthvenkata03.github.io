@@ -54,6 +54,10 @@
 .catCell {
   display: flex;
 }
+.tilt {
+  flex: 1;
+  display: flex;
+}
 .cat {
   width: 100%;
   padding: 16px 20px;
