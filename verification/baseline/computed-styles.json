@@ -1,0 +1,39 @@
+{
+  "1440-home": {
+    "body": {
+      "color": "rgb(232, 234, 237)",
+      "backgroundColor": "rgb(14, 16, 19)",
+      "fontFamily": "Inter, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+      "fontWeight": "400",
+      "fontSize": "14px"
+    },
+    "heroName": {
+      "color": "rgba(0, 0, 0, 0)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "fontFamily": "Inter, sans-serif",
+      "fontWeight": "800",
+      "fontSize": "64px"
+    },
+    "button": {
+      "color": "rgb(207, 211, 218)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "fontFamily": "Inter, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+      "fontWeight": "600",
+      "fontSize": "14px"
+    },
+    "card": {
+      "color": "rgb(199, 203, 209)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "fontFamily": "Inter, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+      "fontWeight": "400",
+      "fontSize": "14px"
+    },
+    "navbar": {
+      "color": "rgb(232, 234, 237)",
+      "backgroundColor": "rgba(14, 16, 19, 0.65)",
+      "fontFamily": "Inter, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+      "fontWeight": "400",
+      "fontSize": "14px"
+    }
+  }
+}

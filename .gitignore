@@ -1,0 +1,21 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+
+# verification — baseline/ is committed (reference); current/ is regenerated
+verification/current/
+test-results/
+playwright-report/
+.playwright/
+
+# logs & os
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# env
+.env
+.env.local
