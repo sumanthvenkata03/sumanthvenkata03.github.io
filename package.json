@@ -15,6 +15,7 @@
     "lint": "eslint .",
     "capture:baseline": "tsx verification/capture-baseline.ts",
     "verify": "tsx verification/verify.ts",
+    "verify:contact": "node verification/contact.mjs",
     "check:seo": "node verification/check-seo.mjs"
   },
   "dependencies": {
