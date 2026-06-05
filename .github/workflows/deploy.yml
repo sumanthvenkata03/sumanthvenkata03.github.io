@@ -1,0 +1,48 @@
+name: Deploy to GitHub Pages
+
+# INACTIVE until you opt in. This workflow only deploys when BOTH are true:
+#   1. Settings → Pages → Build and deployment → Source = "GitHub Actions"
+#   2. A push lands on `master` (or you run it manually via workflow_dispatch).
+# Until you switch the Pages source, the live site keeps deploying from the
+# `restore-2020` branch and is unaffected. See DEPLOY.md.
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never cancel an in-progress production deploy.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      # Chromium is needed for the no-JS prerender step (build:static).
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build:static
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
