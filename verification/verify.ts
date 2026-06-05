@@ -19,7 +19,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const CURRENT = join(__dirname, 'current');
 const BASE = process.env.PREVIEW_URL || 'http://localhost:4173';
-const WIDTHS = [390, 768, 1440];
+const WIDTHS = [320, 390, 768, 1024, 1440];
 const ROUTES = [
   { path: '/', name: 'home' },
   { path: '/about', name: 'about' },
@@ -172,6 +172,25 @@ async function overflowWidth(page: Page): Promise<number> {
     const closedAndNavigated =
       new URL(page.url()).pathname === '/about' && !(await aboutLink.isVisible());
     add('mobile: nav -> /about + menu auto-closes', closedAndNavigated, page.url());
+    await ctx.close();
+  }
+
+  // hamburger reachable at <=767, full nav (toggle hidden) at >=768
+  for (const w of [320, 390]) {
+    const ctx = await browser.newContext({ viewport: { width: w, height: 800 } });
+    const page = await ctx.newPage();
+    await page.goto(BASE + '/', { waitUntil: 'networkidle' });
+    const toggle = page.getByRole('button', { name: /toggle navigation/i });
+    add(`hamburger reachable @${w}`, await toggle.isVisible());
+    await ctx.close();
+  }
+  for (const w of [768, 1024]) {
+    const ctx = await browser.newContext({ viewport: { width: w, height: 800 } });
+    const page = await ctx.newPage();
+    await page.goto(BASE + '/', { waitUntil: 'networkidle' });
+    const toggle = page.getByRole('button', { name: /toggle navigation/i });
+    const aboutVisible = await page.getByRole('link', { name: 'About', exact: true }).isVisible();
+    add(`full nav @${w} (toggle hidden, links shown)`, !(await toggle.isVisible()) && aboutVisible);
     await ctx.close();
   }
 

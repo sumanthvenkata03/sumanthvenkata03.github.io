@@ -36,7 +36,7 @@ npm run verify           # Playwright checks (build must be in dist/)
 
 1. **Settings → Pages → Build and deployment → Source → "GitHub Actions".**
    (This is the switch that moves serving away from the `restore-2020` branch.)
-2. Merge this branch into **`master`** (or push to `master`). That triggers
+2. Push to **`react-master`** (the default branch). That triggers
    `.github/workflows/deploy.yml`, which runs `npm ci`, installs Chromium,
    runs `npm run build:static`, and deploys `dist/` to Pages.
    - You can also trigger it manually: **Actions → Deploy to GitHub Pages → Run workflow**.
@@ -48,6 +48,6 @@ existing branch-based deployment of `restore-2020` continues unchanged.
 
 ## Rolling back
 
-The legacy AngularJS site is preserved in `legacy/` and the `restore-2020`
-branch is untouched, so you can revert by switching the Pages source back to
-"Deploy from a branch" → `restore-2020`.
+The `restore-2020` branch (the original AngularJS site) is untouched, so you can
+revert by switching the Pages source back to "Deploy from a branch" →
+`restore-2020`. The legacy source also remains in this branch's git history.

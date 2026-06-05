@@ -159,21 +159,21 @@ export const SEO: Record<string, RouteMeta> = {
   '/about': {
     title: 'About • Sumanth Venkata',
     description: `About Sumanth Venkata — ${BASE_DESC}`,
-    canonical: 'https://sumanthvenkata.com/about',
+    canonical: 'https://sumanthvenkata.com/about/',
   },
   '/work': {
     title: 'Work • Sumanth Venkata',
     description: `Work experience of Sumanth Venkata — ${BASE_DESC}`,
-    canonical: 'https://sumanthvenkata.com/work',
+    canonical: 'https://sumanthvenkata.com/work/',
   },
   '/projects': {
     title: 'Projects • Sumanth Venkata',
     description: `Projects by Sumanth Venkata — ${BASE_DESC}`,
-    canonical: 'https://sumanthvenkata.com/projects',
+    canonical: 'https://sumanthvenkata.com/projects/',
   },
   '/contact': {
     title: 'Contact • Sumanth Venkata',
     description: `Contact Sumanth Venkata — ${BASE_DESC}`,
-    canonical: 'https://sumanthvenkata.com/contact',
+    canonical: 'https://sumanthvenkata.com/contact/',
   },
 };

@@ -9,8 +9,8 @@ It presents a hero/about intro, technical skills, work experience, featured proj
 contact details, plus a downloadable résumé — across five routes with a fixed top nav and
 a mobile hamburger menu.
 
-> Migrated from the original AngularJS 1.6 / Bootstrap 3 static site to React. The legacy
-> site is preserved under [`legacy/`](legacy/) for reference.
+> Migrated from the original AngularJS 1.6 / Bootstrap 3 static site to React. The original
+> site remains on the `restore-2020` branch and in this branch's git history.
 
 ## Tech stack
 
@@ -41,7 +41,6 @@ No runtime framework CDNs — AngularJS, jQuery, and Bootstrap have been removed
 | `src/data/` | **All copy** — `content.ts`, `skills.ts`, `projects.ts` (single source of truth). |
 | `src/styles/` | `tokens.css`, `global.css`, `keyframes.css`. |
 | `public/` | Served verbatim — `CNAME`, `robots.txt`, `sitemap.xml`, `favicon.ico`, images, `assets/logo/*`, résumé PDF. |
-| `legacy/` | The original AngularJS site (`index.html`, `mainCSS.css`, `module.js`). |
 | `verification/` | Playwright harness (`verify.ts`), baseline screenshots, and the prerender script. |
 | `.github/workflows/deploy.yml` | GitHub Pages deploy workflow (inactive — see [DEPLOY.md](DEPLOY.md)). |
 

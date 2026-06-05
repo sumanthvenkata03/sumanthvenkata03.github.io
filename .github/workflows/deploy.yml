@@ -1,13 +1,12 @@
 name: Deploy to GitHub Pages
 
-# INACTIVE until you opt in. This workflow only deploys when BOTH are true:
-#   1. Settings → Pages → Build and deployment → Source = "GitHub Actions"
-#   2. A push lands on `master` (or you run it manually via workflow_dispatch).
-# Until you switch the Pages source, the live site keeps deploying from the
-# `restore-2020` branch and is unaffected. See DEPLOY.md.
+# Auto-deploys on push to `react-master` (the default branch) — but ONLY once
+# Settings → Pages → Build and deployment → Source = "GitHub Actions". Until that
+# Pages source is switched, the deploy step has nowhere to publish and the live
+# site keeps serving from the `restore-2020` branch, unaffected. See DEPLOY.md.
 on:
   push:
-    branches: [master]
+    branches: [react-master]
   workflow_dispatch:
 
 permissions:

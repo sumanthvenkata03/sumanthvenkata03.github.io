@@ -14,7 +14,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "capture:baseline": "tsx verification/capture-baseline.ts",
-    "verify": "tsx verification/verify.ts"
+    "verify": "tsx verification/verify.ts",
+    "check:seo": "node verification/check-seo.mjs"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
