@@ -175,6 +175,41 @@ async function overflowWidth(page: Page): Promise<number> {
     await ctx.close();
   }
 
+  // contact form validation (Redux contactSlice)
+  {
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    const page = await ctx.newPage();
+    await page.goto(BASE + '/contact', { waitUntil: 'networkidle' });
+    await page.getByRole('button', { name: /^submit$/i }).click();
+    await page.waitForTimeout(300);
+    const invalid = await page.locator('[aria-invalid="true"]').count();
+    add('contact: empty submit shows errors', invalid >= 2, `${invalid} invalid fields`);
+    await page.fill('#firstName', 'Jane');
+    await page.fill('#email', 'jane@example.com');
+    await page.fill('#message', 'Hello, this is a test message.');
+    await page.waitForTimeout(150);
+    const invalidAfter = await page.locator('[aria-invalid="true"]').count();
+    add('contact: valid input clears errors', invalidAfter === 0, `${invalidAfter} invalid`);
+    await ctx.close();
+  }
+  // animations toggle + localStorage persistence (uiSlice + persist middleware)
+  {
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    const page = await ctx.newPage();
+    await page.goto(BASE + '/', { waitUntil: 'networkidle' });
+    const toggle = page.getByRole('switch', { name: /animations/i });
+    const before = await page.evaluate(`document.documentElement.dataset.animations`);
+    await toggle.click();
+    await page.waitForTimeout(200);
+    const after = await page.evaluate(`document.documentElement.dataset.animations`);
+    add('animations: toggle flips data-animations', before !== after, `${before} -> ${after}`);
+    await page.reload({ waitUntil: 'networkidle' });
+    await page.waitForTimeout(300);
+    const afterReload = await page.evaluate(`document.documentElement.dataset.animations`);
+    add('animations: persists across reload', afterReload === after, `${afterReload}`);
+    await ctx.close();
+  }
+
   // external link reachability (opt-in; networky/slow)
   if (process.env.CHECK_LINKS) {
     const ctx = await pwRequest.newContext();

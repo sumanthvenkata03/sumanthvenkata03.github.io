@@ -1,3 +1,4 @@
+import AnimationsToggle from '../ui/AnimationsToggle';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -28,6 +29,7 @@ export default function Footer() {
           </svg>
         </a>
       </div>
+      <AnimationsToggle />
     </footer>
   );
 }
