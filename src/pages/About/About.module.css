@@ -1,0 +1,109 @@
+.content {
+  margin: 60px auto 20px;
+}
+
+/* Headline tech strip (Devicon icons) */
+.techStrip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  max-width: 820px;
+  margin: 10px auto 36px;
+  padding: 0 16px;
+}
+.techItem {
+  display: inline-flex;
+}
+.techStrip i {
+  display: inline-block;
+  font-size: clamp(28px, 8vw, 40px);
+  line-height: 1;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s;
+}
+.techStrip i:hover {
+  transform: translateY(-4px) scale(1.18);
+}
+@media (min-width: 768px) {
+  .techStrip {
+    gap: 18px;
+  }
+}
+
+/* Categorized skills grid */
+.cats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  max-width: 1000px;
+  margin: 0 auto 20px;
+  padding: 0 12px;
+}
+@media (min-width: 600px) {
+  .cats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 992px) {
+  .cats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.catCell {
+  display: flex;
+}
+.cat {
+  width: 100%;
+  padding: 16px 20px;
+}
+.cat h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--teal-light);
+  letter-spacing: 0.3px;
+}
+.cat p {
+  margin: 0;
+  color: #cbd1d8;
+  line-height: 1.5;
+  font-size: 14.5px;
+}
+
+/* Education */
+.eduCell {
+  display: block;
+}
+.edu {
+  width: 90%;
+  margin: 20px auto;
+  font-size: 16px;
+}
+.edu a {
+  color: var(--teal-light);
+}
+.fromTo {
+  float: right;
+  color: var(--muted);
+  font-weight: 600;
+}
+@media (max-width: 991px) {
+  .edu {
+    width: 94%;
+    font-size: 15px;
+  }
+  .fromTo {
+    float: none;
+    display: block;
+    margin-top: 6px;
+    text-align: left;
+  }
+}
+@media (max-width: 480px) {
+  .edu {
+    width: 96%;
+    font-size: 14px;
+  }
+}

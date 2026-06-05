@@ -1,0 +1,58 @@
+/* Ported from legacy .btn-accent / .btn-ghost + shine sweep.
+   Keyframe co-located (CSS Modules scopes animation references). */
+@keyframes btnShine {
+  to { left: 150%; }
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 18px;
+  cursor: pointer;
+  line-height: 1.4;
+  text-align: center;
+  transition: opacity 0.2s, border-color 0.2s, color 0.2s;
+}
+.lg {
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 8px;
+}
+.accent {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, var(--teal), var(--navy));
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(15, 118, 110, 0.3);
+}
+.accent:hover {
+  opacity: 0.95;
+  color: #fff;
+}
+.accent::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+.accent:hover::after {
+  animation: btnShine 0.8s ease;
+}
+.ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #e8eaed;
+}
+.ghost:hover {
+  border-color: var(--accent-text);
+  color: var(--accent-text);
+}

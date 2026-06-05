@@ -4,7 +4,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import SkipLink from './SkipLink';
-import { useAppDispatch } from '../../store/hooks';
+import Seo from '../ui/Seo';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setActiveSection, type SectionId } from '../../store/slices/uiSlice';
 import { useSyncReducedMotion } from '../../hooks/useSyncReducedMotion';
 import { useAnimationsActive } from '../../hooks/useAnimationsActive';
@@ -19,10 +20,19 @@ export default function Layout() {
   const outlet = useOutlet();
   const dispatch = useAppDispatch();
   const animate = useAnimationsActive();
+  const animationsEnabled = useAppSelector((s) => s.ui.animationsEnabled);
+  const reducedMotion = useAppSelector((s) => s.ui.reducedMotion);
   const mainRef = useRef<HTMLElement>(null);
   const firstRender = useRef(true);
 
   useSyncReducedMotion();
+
+  // Reflect the animation preference on <html> so CSS-keyframe decorations
+  // (hero shine, orbs, button shine) are disabled too — not just Framer ones.
+  useEffect(() => {
+    document.documentElement.dataset.animations =
+      animationsEnabled && !reducedMotion ? 'on' : 'off';
+  }, [animationsEnabled, reducedMotion]);
 
   // Sync active section to the route (drives nav highlight + per-route meta).
   useEffect(() => {
@@ -42,6 +52,7 @@ export default function Layout() {
 
   return (
     <>
+      <Seo />
       <SkipLink />
       <Navbar />
       <main id="main" ref={mainRef} tabIndex={-1}>

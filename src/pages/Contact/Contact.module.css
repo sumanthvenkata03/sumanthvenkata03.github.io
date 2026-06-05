@@ -1,0 +1,54 @@
+.details {
+  margin: 16px auto 24px;
+  color: #cbd1d8;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+}
+.details a {
+  color: #cbd1d8;
+}
+.details a:hover {
+  color: var(--teal-light);
+}
+.dicon {
+  color: var(--teal-light);
+  vertical-align: -2px;
+  margin-right: 4px;
+}
+
+/* Mobile-first: stacked, large tap targets */
+.sep {
+  display: none;
+}
+.details a,
+.loc {
+  display: block;
+  margin: 10px 0;
+  min-height: 44px;
+  line-height: 44px;
+}
+@media (min-width: 768px) {
+  .details a,
+  .loc {
+    display: inline;
+    margin: 0;
+    min-height: 0;
+    line-height: inherit;
+  }
+  .sep {
+    display: inline;
+    margin: 0 12px;
+    color: var(--muted);
+  }
+}
+
+.formWrap {
+  margin-top: 24px;
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.formCard {
+  width: 100%;
+}

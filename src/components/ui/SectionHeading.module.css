@@ -1,0 +1,37 @@
+.wrap {
+  text-align: center;
+}
+.title {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: clamp(32px, 6vw, 64px);
+  line-height: 1.05;
+  color: #fff;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
+}
+.underline {
+  position: absolute;
+  left: calc(50% - 36px);
+  bottom: 0;
+  width: 72px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--teal-light));
+  transform: scaleX(1);
+  transform-origin: center;
+}
+.sub {
+  font-size: clamp(22px, 5vw, 32px);
+  text-shadow: none;
+  margin: 20px 0 10px;
+}
+.role {
+  margin-top: 8px;
+  font-size: clamp(16px, 4.5vw, 20px);
+  font-family: 'Lora', serif;
+  font-style: italic;
+  color: #d2d5d9;
+}

@@ -79,3 +79,13 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+/* User toggle (Redux animationsEnabled) → same effect for CSS-keyframe
+   decorations. Set by Layout on <html data-animations="off">. */
+html[data-animations='off'] *,
+html[data-animations='off'] *::before,
+html[data-animations='off'] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}

@@ -30,6 +30,39 @@ const ROUTES = [
 
 mkdirSync(CURRENT, { recursive: true });
 
+// Content-parity: representative copy that MUST appear per route (from
+// MIGRATION-INVENTORY.md). Apostrophes are the curly ’ used in the source.
+const PARITY: Record<string, string[]> = {
+  home: [
+    'Hello, I’m', 'Sumanth', 'Venkata',
+    'Senior UI / Front-End Engineer · React · Angular · TypeScript · Micro-Frontends',
+    'Years experience', 'Annual sessions', 'Faster builds', 'Few lines about me',
+    'QualityNet Platform', 'Module Federation', 'Section 508 / WCAG',
+  ],
+  about: [
+    'About Me', 'Professional developer with ~8 years', 'Technical Skills',
+    'Languages', 'Frameworks & Libraries', 'UI & Data Viz', 'Design & UX', 'Architecture',
+    'Build & Testing', 'CI/CD & DevOps', 'Analytics', 'GenAI / AI', 'APIs & Web',
+    'Accessibility & Compliance', 'Practices & Tools',
+    'Education', 'University of Central Missouri', 'Anna University',
+    'Aug 2016 – Dec 2017', '2012 – 2016',
+  ],
+  work: [
+    'Experience', 'Overview of my recent work', 'Senior UI / Front-End Engineer',
+    'Cadmus Group — CMS', 'Mar 2019 – Present • Reston, VA (Remote)',
+    'Senior React Developer', 'UnitedHealth Group / Optum', 'Jul 2018 – Feb 2019 • Hartford, CT',
+    'Module Federation', 'AG Grid', 'BEACH',
+  ],
+  projects: [
+    'Projects', 'A few things I’ve built end-to-end', 'QualityNet Platform', 'Federal Platform',
+    'The Big Screen Index', 'Astro Match', 'AI-Powered Semantic Search (CMS)',
+    'Internal project — no public link', 'qualitynet.cms.gov',
+  ],
+  contact: [
+    'Contact Me', 'sumanth.techie9@gmail.com', '+1 815-496-0803', 'Leesburg, VA', 'Contact Form',
+  ],
+};
+
 type Row = { check: string; ok: boolean; detail: string };
 const rows: Row[] = [];
 const add = (check: string, ok: boolean, detail = '') => rows.push({ check, ok, detail });
@@ -68,6 +101,12 @@ async function overflowWidth(page: Page): Promise<number> {
 
     const navLinks = await page.locator('header nav a').count();
     add(`[${route.name}] nav present (≥6 anchors)`, navLinks >= 6, `${navLinks} anchors`);
+
+    // content parity — textContent (raw source text, not affected by
+    // text-transform like the uppercased "Federal Platform" badge)
+    const bodyText = ((await page.evaluate('document.body.textContent')) as string) || '';
+    const missing = (PARITY[route.name] ?? []).filter((s) => !bodyText.includes(s));
+    add(`[${route.name}] content parity (${PARITY[route.name]?.length ?? 0} snippets)`, missing.length === 0, missing.length ? `MISSING: ${missing.join(' | ')}` : '');
 
     // responsive screenshots + overflow
     for (const w of WIDTHS) {
