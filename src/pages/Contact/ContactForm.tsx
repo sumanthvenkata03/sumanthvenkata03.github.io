@@ -62,6 +62,7 @@ export default function ContactForm() {
     }
 
     dispatch(setStatus({ status: 'sending' }));
+    const fullName = `${fields.firstName} ${fields.lastName}`.trim();
     try {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
@@ -72,7 +73,7 @@ export default function ContactForm() {
           email: fields.email,
           phone: fields.phone,
           message: fields.message,
-          _subject: `Portfolio contact — ${fields.firstName} ${fields.lastName}`.trim(),
+          _subject: `New opportunity inquiry from ${fullName} — via your portfolio`,
         }), // Formspree uses the "email" field as the reply-to address
       });
       if (res.ok) {
