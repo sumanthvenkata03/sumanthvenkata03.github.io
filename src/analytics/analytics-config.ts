@@ -2,3 +2,5 @@
 // and keeps CI builds working without env wiring. Leave '' to disable a tool.
 export const GA_MEASUREMENT_ID = 'G-ZMKVZ0N4WG';
 export const CLARITY_PROJECT_ID = 'x2hre7d1o2';
+// Standalone Vercel notifier that pings Slack once per visit. Leave '' to disable.
+export const VISIT_ENDPOINT = 'https://portfolio-visit-notifier.vercel.app/api/visit';

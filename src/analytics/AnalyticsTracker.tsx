@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { initAnalytics, trackPageview } from './analytics';
+import { notifyVisit } from './visit-notify';
 
 /**
  * Headless analytics wiring. Renders nothing; must live INSIDE the router so
@@ -10,9 +11,11 @@ import { initAnalytics, trackPageview } from './analytics';
 export default function Analytics(): null {
   const location = useLocation();
 
-  // Init once.
+  // Init once. notifyVisit() fires the one-per-visit Slack ping; it must NOT go in
+  // the per-route effect below, or it would re-ping on every navigation.
   useEffect(() => {
     initAnalytics();
+    notifyVisit();
   }, []);
 
   // One page_view per route change (and the initial load). Defer a frame so
