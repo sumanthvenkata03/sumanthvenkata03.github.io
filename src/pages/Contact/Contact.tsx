@@ -5,9 +5,11 @@ import Card from '../../components/ui/Card';
 import Icon from '../../components/ui/Icon';
 import ContactForm from './ContactForm';
 import { SECTION, CONTACT_DETAILS } from '../../data/content';
+import { useIsMobile } from '../../hooks/useIsMobile';
+import MobileHome from '../../components/mobile/MobileHome';
 import styles from './Contact.module.css';
 
-export default function Contact() {
+export function ContactContent() {
   const s = SECTION.contact;
   const d = CONTACT_DETAILS;
   return (
@@ -35,4 +37,9 @@ export default function Contact() {
       </Reveal>
     </SectionShell>
   );
+}
+
+export default function Contact() {
+  const isMobile = useIsMobile();
+  return isMobile ? <MobileHome initialSection="contact" /> : <ContactContent />;
 }

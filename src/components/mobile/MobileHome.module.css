@@ -1,0 +1,10 @@
+/* One scrolling page. Each section gets scroll-margin-top equal to the fixed
+   brand-bar height so anchor jumps (and the action-bar links) land cleanly.
+   Bottom clearance for the fixed action bar lives on the shared Footer
+   (Footer.module.css, mobile media query), which is the true end of the page. */
+.page {
+  width: 100%;
+}
+.section {
+  scroll-margin-top: var(--nav-h);
+}

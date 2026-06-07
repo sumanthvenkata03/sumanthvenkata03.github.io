@@ -4,9 +4,11 @@ import Card from '../../components/ui/Card';
 import Reveal from '../../components/ui/Reveal';
 import RichText from '../../components/ui/RichText';
 import { SECTION, EXPERIENCE } from '../../data/content';
+import { useIsMobile } from '../../hooks/useIsMobile';
+import MobileHome from '../../components/mobile/MobileHome';
 import styles from './Work.module.css';
 
-export default function Work() {
+export function WorkContent() {
   const s = SECTION.work;
   return (
     <SectionShell bgImage={s.bgImage}>
@@ -38,4 +40,9 @@ export default function Work() {
       </div>
     </SectionShell>
   );
+}
+
+export default function Work() {
+  const isMobile = useIsMobile();
+  return isMobile ? <MobileHome initialSection="work" /> : <WorkContent />;
 }

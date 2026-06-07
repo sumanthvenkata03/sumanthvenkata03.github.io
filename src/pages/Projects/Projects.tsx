@@ -7,9 +7,11 @@ import Icon from '../../components/ui/Icon';
 import { buttonClass } from '../../components/ui/buttonClass';
 import { SECTION } from '../../data/content';
 import { PROJECTS } from '../../data/projects';
+import { useIsMobile } from '../../hooks/useIsMobile';
+import MobileHome from '../../components/mobile/MobileHome';
 import styles from './Projects.module.css';
 
-export default function Projects() {
+export function ProjectsContent() {
   const s = SECTION.projects;
   return (
     <SectionShell bgImage={s.bgImage}>
@@ -49,4 +51,9 @@ export default function Projects() {
       </div>
     </SectionShell>
   );
+}
+
+export default function Projects() {
+  const isMobile = useIsMobile();
+  return isMobile ? <MobileHome initialSection="projects" /> : <ProjectsContent />;
 }

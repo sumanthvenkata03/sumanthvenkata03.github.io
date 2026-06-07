@@ -5,9 +5,12 @@ import CountUp from '../../components/ui/CountUp';
 import RichText from '../../components/ui/RichText';
 import { buttonClass } from '../../components/ui/buttonClass';
 import { HERO } from '../../data/content';
+import { useIsMobile } from '../../hooks/useIsMobile';
+import MobileHome from '../../components/mobile/MobileHome';
 import styles from './Home.module.css';
 
-export default function Home() {
+/** The hero — original Home content, reused as the #home section on mobile. */
+export function HomeHero() {
   return (
     <SectionShell bgImage={HERO.bgImage} variant="hero">
       <div className={styles.inner}>
@@ -65,4 +68,9 @@ export default function Home() {
       </div>
     </SectionShell>
   );
+}
+
+export default function Home() {
+  const isMobile = useIsMobile();
+  return isMobile ? <MobileHome /> : <HomeHero />;
 }

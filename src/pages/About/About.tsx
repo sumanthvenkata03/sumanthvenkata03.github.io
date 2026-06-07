@@ -5,9 +5,11 @@ import Reveal from '../../components/ui/Reveal';
 import Tilt from '../../components/ui/Tilt';
 import { SECTION, EDUCATION } from '../../data/content';
 import { TECH_STRIP, SKILL_CATEGORIES } from '../../data/skills';
+import { useIsMobile } from '../../hooks/useIsMobile';
+import MobileHome from '../../components/mobile/MobileHome';
 import styles from './About.module.css';
 
-export default function About() {
+export function AboutContent() {
   const s = SECTION.about;
   return (
     <SectionShell bgImage={s.bgImage}>
@@ -54,4 +56,9 @@ export default function About() {
       </div>
     </SectionShell>
   );
+}
+
+export default function About() {
+  const isMobile = useIsMobile();
+  return isMobile ? <MobileHome initialSection="about" /> : <AboutContent />;
 }

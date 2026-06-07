@@ -81,6 +81,11 @@
 }
 
 @media (max-width: 767px) {
+  /* Clear the fixed mobile action bar (MobileActionBar) so the footer credit
+     is never hidden behind it. The footer is the true end of the page. */
+  .footer {
+    padding-bottom: calc(110px + env(safe-area-inset-bottom));
+  }
   .heading {
     font-size: 20px;
   }
