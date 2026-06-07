@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import Reveal from '../../components/ui/Reveal';
 import { HomeHero } from '../../pages/Home/Home';
 import { AboutContent } from '../../pages/About/About';
 import { WorkContent } from '../../pages/Work/Work';
@@ -73,29 +72,19 @@ export default function MobileHome({ initialSection }: Props) {
   return (
     <div ref={rootRef} className={styles.page}>
       <section id="home" className={styles.section}>
-        <Reveal variant="up">
-          <HomeHero />
-        </Reveal>
+        <HomeHero mobile />
       </section>
       <section id="about" className={styles.section}>
-        <Reveal variant="up">
-          <AboutContent />
-        </Reveal>
+        <AboutContent mobile />
       </section>
       <section id="work" className={styles.section}>
-        <Reveal variant="up">
-          <WorkContent />
-        </Reveal>
+        <WorkContent mobile />
       </section>
       <section id="projects" className={styles.section}>
-        <Reveal variant="up">
-          <ProjectsContent />
-        </Reveal>
+        <ProjectsContent mobile />
       </section>
       <section id="contact" className={styles.section}>
-        <Reveal variant="up">
-          <ContactContent />
-        </Reveal>
+        <ContactContent mobile />
       </section>
 
       <MobileActionBar />

@@ -4,6 +4,10 @@
    (Footer.module.css, mobile media query), which is the true end of the page. */
 .page {
   width: 100%;
+  /* The roll variants translate cards off-screen on the x-axis before settling;
+     clip horizontally so no sideways scrollbar appears. `clip` (not `hidden`)
+     avoids turning this into a scroll container. Mobile one-page root only. */
+  overflow-x: clip;
 }
 .section {
   scroll-margin-top: var(--nav-h);

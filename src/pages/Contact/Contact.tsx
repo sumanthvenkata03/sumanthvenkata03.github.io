@@ -9,7 +9,7 @@ import { useIsMobile } from '../../hooks/useIsMobile';
 import MobileHome from '../../components/mobile/MobileHome';
 import styles from './Contact.module.css';
 
-export function ContactContent() {
+export function ContactContent({ mobile }: { mobile?: boolean }) {
   const s = SECTION.contact;
   const d = CONTACT_DETAILS;
   return (
@@ -30,7 +30,7 @@ export function ContactContent() {
         </span>
       </div>
 
-      <Reveal variant="up" className={styles.formWrap}>
+      <Reveal variant={mobile ? 'rise' : 'up'} className={styles.formWrap}>
         <Card soft className={styles.formCard}>
           <ContactForm />
         </Card>

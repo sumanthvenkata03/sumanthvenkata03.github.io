@@ -6,13 +6,20 @@ import RichText from '../../components/ui/RichText';
 import { buttonClass } from '../../components/ui/buttonClass';
 import { HERO } from '../../data/content';
 import { useIsMobile } from '../../hooks/useIsMobile';
+import HeroParallax from '../../components/ui/HeroParallax';
 import MobileHome from '../../components/mobile/MobileHome';
 import styles from './Home.module.css';
 
-/** The hero — original Home content, reused as the #home section on mobile. */
-export function HomeHero() {
+/** The hero — original Home content, reused as the #home section on mobile.
+ *  On mobile it adds a subtle parallax glow layer behind the (unchanged) text. */
+export function HomeHero({ mobile }: { mobile?: boolean }) {
   return (
     <SectionShell bgImage={HERO.bgImage} variant="hero">
+      {mobile ? (
+        <HeroParallax className={styles.heroGlow}>
+          <div className={styles.heroGlowInner} aria-hidden="true" />
+        </HeroParallax>
+      ) : null}
       <div className={styles.inner}>
         <img
           src={HERO.photo}

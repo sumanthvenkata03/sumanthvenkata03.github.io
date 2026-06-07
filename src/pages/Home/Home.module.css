@@ -16,6 +16,22 @@
   text-align: center;
 }
 
+/* Mobile-only decorative parallax glow (rendered behind the hero text via
+   <HeroParallax>; never present on desktop). Animates transform only. */
+.heroGlow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.heroGlowInner {
+  position: absolute;
+  inset: -15%;
+  background: radial-gradient(60% 50% at 30% 25%, rgba(94, 234, 212, 0.18), transparent 70%),
+    radial-gradient(55% 45% at 75% 30%, rgba(31, 56, 100, 0.4), transparent 70%);
+}
+
 /* Hero staggered entrance — gated on data-animations='on' (mirrors legacy
    html.js gating) so content is fully visible when animations are off/no-JS. */
 html[data-animations='on'] .inner > * {
