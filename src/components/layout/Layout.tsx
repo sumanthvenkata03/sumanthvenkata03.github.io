@@ -7,7 +7,7 @@ import SkipLink from './SkipLink';
 import Seo from '../ui/Seo';
 import ScrollProgress from '../graphics/ScrollProgress';
 import Analytics from '../../analytics/AnalyticsTracker';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useAppDispatch } from '../../store/hooks';
 import { setActiveSection, type SectionId } from '../../store/slices/uiSlice';
 import { useSyncReducedMotion } from '../../hooks/useSyncReducedMotion';
 import { useAnimationsActive } from '../../hooks/useAnimationsActive';
@@ -22,19 +22,16 @@ export default function Layout() {
   const outlet = useOutlet();
   const dispatch = useAppDispatch();
   const animate = useAnimationsActive();
-  const animationsEnabled = useAppSelector((s) => s.ui.animationsEnabled);
-  const reducedMotion = useAppSelector((s) => s.ui.reducedMotion);
   const mainRef = useRef<HTMLElement>(null);
   const firstRender = useRef(true);
 
   useSyncReducedMotion();
 
-  // Reflect the animation preference on <html> so CSS-keyframe decorations
-  // (hero shine, orbs, button shine) are disabled too — not just Framer ones.
+  // Animations are always on site-wide; flag <html> so CSS-keyframe decorations
+  // (hero shine, orbs, button shine) run too — not just the Framer ones.
   useEffect(() => {
-    document.documentElement.dataset.animations =
-      animationsEnabled && !reducedMotion ? 'on' : 'off';
-  }, [animationsEnabled, reducedMotion]);
+    document.documentElement.dataset.animations = 'on';
+  }, []);
 
   // Sync active section to the route (drives nav highlight + per-route meta).
   useEffect(() => {

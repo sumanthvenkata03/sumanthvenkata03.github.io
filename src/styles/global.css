@@ -66,26 +66,7 @@ select {
   outline: none; /* programmatic focus target on route change — no visible ring */
 }
 
-/* Global reduced-motion safety net (ported from legacy). Component CSS adds
-   more specific overrides; Framer Motion is gated separately via useReducedMotion
-   + the Redux animationsEnabled flag. */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* User toggle (Redux animationsEnabled) → same effect for CSS-keyframe
-   decorations. Set by Layout on <html data-animations="off">. */
-html[data-animations='off'] *,
-html[data-animations='off'] *::before,
-html[data-animations='off'] *::after {
-  animation-duration: 0.001ms !important;
-  animation-iteration-count: 1 !important;
-  transition-duration: 0.001ms !important;
-}
+/* Animations are always on site-wide (no user toggle, OS reduce-motion not
+   honored by design). The former reduced-motion safety net and the
+   html[data-animations='off'] block were removed so CSS-keyframe decorations
+   run on every device. */

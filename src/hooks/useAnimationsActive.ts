@@ -1,12 +1,8 @@
-import { useAppSelector } from '../store/hooks';
-
 /**
- * True when animations should run. The in-app toggle (Redux `animationsEnabled`)
- * is the single source of truth: it can OVERRIDE the OS reduce-motion setting
- * when the user explicitly turns animations on. The OS setting only seeds the
- * toggle's default on first visit (see uiSlice); it no longer hard-blocks here.
+ * True always. Animations are on site-wide with no user control; the OS
+ * reduce-motion setting no longer gates them. Kept as a hook so existing
+ * call sites (Reveal, HeroParallax, Layout, etc.) need no changes.
  */
 export function useAnimationsActive(): boolean {
-  const animationsEnabled = useAppSelector((s) => s.ui.animationsEnabled);
-  return animationsEnabled;
+  return true;
 }

@@ -1,5 +1,4 @@
 import { version as reactVersion } from 'react';
-import AnimationsToggle from '../ui/AnimationsToggle';
 import Reveal from '../ui/Reveal';
 import styles from './Footer.module.css';
 
@@ -37,7 +36,6 @@ export default function Footer() {
           </svg>
         </a>
       </div>
-      <AnimationsToggle />
 
       <Reveal variant="up" amount="some" margin="0px" className={styles.credit}>
         <span className={styles.creditText}>
