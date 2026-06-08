@@ -19,7 +19,14 @@ const prefs = loadPrefs();
 const initialState: UiState = {
   mobileNavOpen: false,
   reducedMotion: false,
-  animationsEnabled: prefs.animationsEnabled ?? true,
+  // Seed the toggle's DEFAULT from the OS on first visit only (no stored pref yet):
+  // OS reduce-motion ON → start OFF (respectful default), but the toggle can turn
+  // it ON and that choice persists to localStorage. After that, OS no longer gates.
+  animationsEnabled:
+    prefs.animationsEnabled ??
+    !(typeof window !== 'undefined'
+      && window.matchMedia
+      && window.matchMedia('(prefers-reduced-motion: reduce)').matches),
   activeSection: 'home',
 };
 
